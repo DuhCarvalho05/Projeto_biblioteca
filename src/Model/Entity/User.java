@@ -1,5 +1,7 @@
 package Model.Entity;
 
+import Model.UserType;
+
 public abstract class User {
     protected String name;
     protected String email;
