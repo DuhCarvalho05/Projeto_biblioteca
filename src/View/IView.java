@@ -1,24 +1,25 @@
 package View;
 
 import java.util.List;
+import DTO.*;
 
 public interface IView {
 
     MenuOptions showMenu();
 
-    UserDto readUser();
+    UserDTO readUser();
 
-    BookDto readBook();
+    BookDTO readBook();
 
-    ReserveDto readReserve(List<BookDto> books, List<UserDto> users);
+    ReserveDto readReserve(List<BookDTO> books, List<UserDTO> users);
 
-    void showAllBooks(List<BookDto> books);
+    void showAllBooks(List<BookDTO> books);
 
-    void showReservedBooks(List<BookDto> books);
+    void showReservedBooks(List<BookDTO> books);
 
     void showUserWithBook(List<ReserveDto> reserveds);
 
-    void showUserWithPenality(List<UserDto> penalizeds);
+    void showUserWithPenality(List<UserDTO> penalizeds);
 
     void showLateBooking(List<ReserveDto> late);
 }
