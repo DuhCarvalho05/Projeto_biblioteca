@@ -3,11 +3,10 @@ package Model.Entity;
 import java.time.LocalDate;
 
 public class Loan {
-    private User bailee;
-    private Book borrowed;
-    private LocalDate acquiredDate;
-    private LocalDate returnDate;
-    private int timesBorrowed;
+    private final User bailee;
+    private final Book borrowed;
+    private final LocalDate acquiredDate;
+    private final LocalDate returnDate;
 
     public Loan(User bailee, Book book, LocalDate acquiredDate,
                 LocalDate returnDate) {
@@ -31,9 +30,5 @@ public class Loan {
 
     public LocalDate getReturnDate() {
         return returnDate;
-    }
-
-    public int getTimesBorrowed() {
-        return timesBorrowed;
     }
 }
