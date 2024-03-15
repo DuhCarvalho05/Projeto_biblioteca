@@ -21,11 +21,11 @@ public class UserDTO {
     }
 
     public UserDTO(User domain){
-        this.name = domain.getName;
-        this.email = domain.getEmail;
-        this.telefone = domain.getTelefone;
-        this.userType = domain.getUserType;
-        this.penalty = domain.getPenalty;
+        this.name = domain.getName();
+        this.email = domain.getEmail();
+        this.telefone = domain.getTelefone();
+        this.userType = domain.getUserType();
+        this.penalty = domain.getPenalty();
     }
 
     public User toDomain(){
