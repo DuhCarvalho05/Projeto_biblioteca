@@ -1,6 +1,7 @@
 package View;
 
 import java.util.List;
+import DTO.*;
 
 public class PanelView implements IView{
     @Override
@@ -9,27 +10,27 @@ public class PanelView implements IView{
     }
 
     @Override
-    public UserDto readUser() {
+    public UserDTO readUser() {
         return null;
     }
 
     @Override
-    public BookDto readBook() {
+    public BookDTO readBook() {
         return null;
     }
 
     @Override
-    public ReserveDto readReserve(List<BookDto> books, List<UserDto> users) {
+    public ReserveDto readReserve(List<BookDTO> books, List<UserDTO> users) {
         return null;
     }
 
     @Override
-    public void showAllBooks(List<BookDto> books) {
+    public void showAllBooks(List<BookDTO> books) {
 
     }
 
     @Override
-    public void showReservedBooks(List<BookDto> books) {
+    public void showReservedBooks(List<BookDTO> books) {
 
     }
 
@@ -39,7 +40,7 @@ public class PanelView implements IView{
     }
 
     @Override
-    public void showUserWithPenality(List<UserDto> penalizeds) {
+    public void showUserWithPenality(List<UserDTO> penalizeds) {
 
     }
 
