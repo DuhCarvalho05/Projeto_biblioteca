@@ -1,12 +1,15 @@
 package Model.Entity;
 
-public class Loan {
-    private User bailee;
-    private Book borrowed;
-    private String acquiredDate;
-    private String returnDate;
+import java.time.LocalDate;
 
-    public Loan(User bailee, Book book, String acquiredDate, String returnDate) {
+public class Loan {
+    private final User bailee;
+    private final Book borrowed;
+    private final LocalDate acquiredDate;
+    private final LocalDate returnDate;
+
+    public Loan(User bailee, Book book, LocalDate acquiredDate,
+                LocalDate returnDate) {
         this.bailee = bailee;
         this.borrowed = book;
         this.acquiredDate = acquiredDate;
@@ -21,11 +24,11 @@ public class Loan {
         return borrowed;
     }
 
-    public String getAcquiredDate() {
+    public LocalDate getAcquiredDate() {
         return acquiredDate;
     }
 
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 }

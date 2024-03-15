@@ -1,10 +1,11 @@
 package Model.Entity;
 
 public class Book {
-    private String title;
-    private int edition;
-    private String author;
+    private final String title;
+    private final int edition;
+    private final String author;
     private boolean isAvailable;
+    private int timesBorrowed;
 
     private int timesBorrowed;
 
@@ -29,8 +30,16 @@ public class Book {
         return author;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
+    public int getTimesBorrowed() {
+        return timesBorrowed;
+    }
+
+    public boolean setBorrow() {
+        if (!isAvailable())
+            return false;
+
+        timesBorrowed++;
+        return true;
     }
 
     public int getTimesBorrowed() {
@@ -44,9 +53,12 @@ public class Book {
     public boolean setAvailability(boolean availability) {
         if (isAvailable == availability)
             return false;
-        else
-            isAvailable = availability;
 
+        isAvailable = availability;
         return true;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
     }
 }
