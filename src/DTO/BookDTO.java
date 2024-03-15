@@ -10,6 +10,8 @@ public class BookDTO {
     private Boolean available;
     private int timesBorrowed;
 
+
+
     public BookDTO(String title, int edition, String author, Boolean available, int timesBorrowed) {
         this.title = title;
         this.edition = edition;
@@ -19,11 +21,11 @@ public class BookDTO {
     }
 
     public BookDTO(Book domain){
-        this.title = domain.getTitle;
-        this.edition = domain.getEdition;
-        this.author = domain.getAuthor;
-        this.available = domain.getAvailable;
-        this.timesBorrowed = domain.getTimesBorrowed;
+        this.title = domain.getTitle();
+        this.edition = domain.getEdition();
+        this.author = domain.getAuthor();
+        this.available = domain.isAvailable();
+        this.timesBorrowed = domain.getTimesBorrowed();
     }
 
     public Book toDomain(){
@@ -54,7 +56,7 @@ public class BookDTO {
         this.author = author;
     }
 
-    public Boolean getAvailable() {
+    public Boolean isAvailable() {
         return available;
     }
 

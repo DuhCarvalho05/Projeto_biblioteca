@@ -2,6 +2,7 @@ package View;
 
 import java.util.List;
 import DTO.*;
+import View.Enum.MenuOptions;
 
 public class PanelView implements IView{
     @Override
