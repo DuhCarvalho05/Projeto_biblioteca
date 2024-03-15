@@ -1,4 +1,4 @@
 package Model.Entity;
 
-public abstract class User{
+public abstract class User {
 }

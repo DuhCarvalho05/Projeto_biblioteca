@@ -1,4 +1,4 @@
 package Model.Entity;
 
-public class Employee implements User{
+public class Employee {
 }

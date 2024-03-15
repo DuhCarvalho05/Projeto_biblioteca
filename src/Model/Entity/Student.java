@@ -1,4 +1,4 @@
 package Model.Entity;
 
-public class Book {
+public class Student {
 }
