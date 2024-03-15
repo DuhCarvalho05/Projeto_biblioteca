@@ -6,6 +6,13 @@ public abstract class User {
     protected int phone;
     protected int penalty;
 
+    public User(String name, String email, int phone, int penalty) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.penalty = penalty;
+    }
+
     public int getPenalty() {
         return penalty;
     }

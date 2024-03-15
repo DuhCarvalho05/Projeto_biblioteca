@@ -30,9 +30,9 @@ public class UserDTO {
 
     public User toDomain(){
         if(userType instanceof Student){
-            return new Student(name, email, telefone, penalty);
+            return new Student(name, email, telefone);
         } else if (userType instanceof Employee) {
-            return new Employee(name, email, telefone, penalty);
+            return new Employee(name, email, telefone);
         }
         return null;
     }
