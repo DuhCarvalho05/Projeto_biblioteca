@@ -32,4 +32,9 @@ public abstract class User {
     public void setPenalty(int penalty) {
         this.penalty = penalty;
     }
+
+    public abstract int getDeadline();
+
+    public abstract UserType getUserType();
+
 }
