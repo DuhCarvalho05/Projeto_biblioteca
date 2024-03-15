@@ -7,8 +7,6 @@ public class Book {
     private boolean isAvailable;
     private int timesBorrowed;
 
-    private int timesBorrowed;
-
     public Book(String title, int edition, String author,Boolean isAvailable, int timesBorrowed) {
         this.title = title;
         this.edition = edition;
@@ -40,10 +38,6 @@ public class Book {
 
         timesBorrowed++;
         return true;
-    }
-
-    public int getTimesBorrowed() {
-        return timesBorrowed;
     }
 
     public void setTimesBorrowed(int timesBorrowed) {
