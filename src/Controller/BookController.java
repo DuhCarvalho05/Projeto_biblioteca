@@ -1,18 +1,21 @@
 package Controller;
 
+import View.IView;
+import View.PanelView;
+
 public class BookController {
 
     BookService service;
-    ViewConsole view;
+    IView view;
 
     public BookController() {
         service = new BookService();
-        view = new ViewConsole();
+        view = new PanelView();
     }
 
     public void createBook(){
 
-        var book = view.createBook();
+        var book = view.readBook();
 
         if(service.create(book.toDomain())){
             view.succes();
