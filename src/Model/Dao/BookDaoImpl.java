@@ -2,6 +2,7 @@ package Model.Dao;
 
 import Model.Entity.Book;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -23,8 +24,7 @@ public class BookDaoImpl implements BookDao{
 
     @Override
     public boolean insert(Book book) {
-        //TODO
-        return false;
+        return dataset.add(book);
     }
 
     @Override
@@ -35,8 +35,7 @@ public class BookDaoImpl implements BookDao{
 
     @Override
     public List<Book> getAll() {
-        //TODO
-        return null;
+        return new ArrayList<>(dataset);
     }
 
     @Override

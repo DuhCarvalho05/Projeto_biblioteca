@@ -4,14 +4,17 @@ import Model.Entity.Book;
 import Model.Entity.Loan;
 import Model.Entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LoanDaoImpl implements LoanDao{
     private static LoanDaoImpl instance;
-    private static List<Loan> dataset;
+    private static Set<Loan> dataset;
 
     public LoanDaoImpl(){
-        //TODO
+        dataset = new TreeSet<>();
     }
 
     public static LoanDaoImpl getInstance(){
@@ -22,8 +25,7 @@ public class LoanDaoImpl implements LoanDao{
     }
 
     public boolean insert(Loan loan) {
-        //TODO
-        return false;
+        return dataset.add(loan);
     }
 
     @Override
@@ -34,8 +36,7 @@ public class LoanDaoImpl implements LoanDao{
 
     @Override
     public List<Loan> getAll() {
-        //TODO
-        return null;
+        return new ArrayList<>(dataset);
     }
 
     @Override
