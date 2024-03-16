@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public List<User> getById(String email) {
+    public User getById(String email) {
         //TODO
         return null;
     }
