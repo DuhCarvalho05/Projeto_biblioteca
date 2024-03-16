@@ -3,19 +3,20 @@ package DTO;
 import Model.Entity.Employee;
 import Model.Entity.Student;
 import Model.Entity.User;
+import Model.UserType;
 
 public class UserDTO {
 
     private String name;
     private String email;
-    private int telefone;
-    private User userType;
+    private int phone;
+    private UserType userType;
     private int penalty;
 
-    public UserDTO(String name, String email, int telefone, User userType, int penalty) {
+    public UserDTO(String name, String email, int phone, UserType userType, int penalty) {
         this.name = name;
         this.email = email;
-        this.telefone = telefone;
+        this.phone = phone;
         this.userType = userType;
         this.penalty = penalty;
     }
@@ -23,16 +24,15 @@ public class UserDTO {
     public UserDTO(User domain){
         this.name = domain.getName();
         this.email = domain.getEmail();
-        this.telefone = domain.getTelefone();
-        this.userType = domain.getUserType();
+        this.phone = domain.getPhone();
         this.penalty = domain.getPenalty();
     }
 
     public User toDomain(){
-        if(userType instanceof Student){
-            return new Student(name, email, telefone);
-        } else if (userType instanceof Employee) {
-            return new Employee(name, email, telefone);
+        if(userType == UserType.EMPLOYEE){
+            return new Student(name, email, phone);
+        } else if (userType == UserType.STUDENT) {
+            return new Employee(name, email, phone);
         }
         return null;
     }
@@ -53,19 +53,19 @@ public class UserDTO {
         this.email = email;
     }
 
-    public int getTelefone() {
-        return telefone;
+    public int getPhone() {
+        return phone;
     }
 
-    public void setTelefone(int telefone) {
-        this.telefone = telefone;
+    public void setPhone(int phone) {
+        this.phone = phone;
     }
 
-    public User getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 
-    public void setUserType(User userType) {
+    public void setUserType(UserType userType) {
         this.userType = userType;
     }
 
