@@ -12,15 +12,15 @@ public interface IView {
 
     BookDTO readBook();
 
-    ReserveDto readReserve(List<BookDTO> books, List<UserDTO> users);
+    LoanDTO readLoan(List<BookDTO> books, List<UserDTO> users);
 
     void showAllBooks(List<BookDTO> books);
 
-    void showReservedBooks(List<BookDTO> books);
+    void showLoanBooks(List<BookDTO> books);
 
-    void showUserWithBook(List<ReserveDto> reserveds);
+    void showUserWithBook(List<LoanDTO> reserveds);
 
     void showUserWithPenality(List<UserDTO> penalizeds);
 
-    void showLateBooking(List<ReserveDto> late);
+    void showLateBooking(List<LoanDTO> late);
 }
