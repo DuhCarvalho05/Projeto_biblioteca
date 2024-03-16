@@ -4,7 +4,7 @@ import Model.UserType;
 
 public class Employee extends User{
 
-    public Employee(String name, String email, int phone) {
+    public Employee(String name, String email, String phone) {
         super(name, email, phone, 0);
     }
 
