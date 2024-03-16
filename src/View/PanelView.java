@@ -3,7 +3,6 @@ package View;
 import java.awt.*;
 import java.util.List;
 import DTO.*;
-import Model.Entity.User;
 import View.Enum.MenuOptions;
 
 import javax.swing.*;
@@ -26,7 +25,6 @@ public class PanelView implements IView{
         JTextField name = new JTextField();
         JTextField email = new JTextField();
         JTextField phone = new JTextField();
-        JTextField userType = new JTextField();
 
         panel.add(new Label("Nome:"));
         panel.add(name);
@@ -35,12 +33,19 @@ public class PanelView implements IView{
         panel.add(new Label("Telefone:"));
         panel.add(phone);
         panel.add(new Label("Tipo de usuário:"));
+
+        //I dont know if this will work, but I think it will. This is for limit the user to choose between "Aluno" and "Funcionário".
+        //We need to test this.
+        JComboBox<String> userType = new JComboBox<>();
+        userType.addItem("Aluno");
+        userType.addItem("Funcionário");
+
         panel.add(userType);
 
         int option = JOptionPane.showConfirmDialog(null, panel, "Cadastrar Usuário", JOptionPane.OK_CANCEL_OPTION);
 
         if(option == JOptionPane.OK_OPTION){
-            return new UserDTO(name.getText(), email.getText(), phone.getText(), userType.getText());
+            return new UserDTO(name.getText(), email.getText(), phone.getText(), (String) userType.getSelectedItem());
         }
 
         return null;
@@ -188,7 +193,8 @@ public class PanelView implements IView{
         JOptionPane.showMessageDialog(null, menssage, title, messageType);
     }
 
-    public void showMenssage(String message, String title){
+    @Override
+    public void showMessage(String message, String title){
         JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
     }
 

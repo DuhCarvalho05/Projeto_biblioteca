@@ -26,5 +26,5 @@ public interface IView {
 
     void alertScreen(boolean success);
 
-    void showMenssage(String message);
+    void showMessage(String message, String title);
 }
