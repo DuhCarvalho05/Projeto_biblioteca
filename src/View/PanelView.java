@@ -59,9 +59,13 @@ public class PanelView implements IView{
 
         sb.append("------------------------------------------------------------------------\n");
         for (LoanDTO reserved : reserveds){
-            sb.append("Nome: ").append(reserved.getUser().getName());
-            sb.append("Titulo do livro: ").append(reserved.getBook().getTitle());
-            sb.append("Edição: ").append(reserved.getBook().getEdition());
+
+            BookDTO book = reserved.getBook();
+            UserDTO user = reserved.getUser();
+
+            sb.append("Nome: ").append(user.getName());
+            sb.append("Titulo do livro: ").append(book.getTitle());
+            sb.append("Edição: ").append(book.getEdition());
             sb.append("Data do emprestimo: ").append(reserved.getAcquiredDate());
             sb.append("Data de devolução: ").append(reserved.getReturnDate());
             sb.append("------------------------------------------------------------------------\n");
@@ -113,6 +117,29 @@ public class PanelView implements IView{
         }
 
         JOptionPane.showMessageDialog(null, panelBuilder(sb), title, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void alertScreen(boolean success){
+
+        String title;
+        String menssage;
+        int messageType;
+
+        if (success){
+            title = "Sucesso";
+            menssage = "Operação realizada com sucesso!";
+            messageType = JOptionPane.PLAIN_MESSAGE;
+        } else {
+            title = "Erro";
+            menssage = "Erro na ao realizar a operação!";
+            messageType = JOptionPane.ERROR_MESSAGE;
+        }
+
+        JOptionPane.showMessageDialog(null, menssage, title, messageType);
+    }
+
+    public void showMenssage(String message, String title){
+        JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
     }
 
     private static Panel panelBuilder(StringBuilder sb){
