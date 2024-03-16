@@ -40,7 +40,7 @@ public class PanelView implements IView{
         int option = JOptionPane.showConfirmDialog(null, panel, "Cadastrar Usuário", JOptionPane.OK_CANCEL_OPTION);
 
         if(option == JOptionPane.OK_OPTION){
-            return new UserDTO(name.getText(), email.getText(), phone.getText(), userType.getText(), 0);
+            return new UserDTO(name.getText(), email.getText(), phone.getText(), userType.getText());
         }
 
         return null;
@@ -73,13 +73,14 @@ public class PanelView implements IView{
     }
 
     @Override
-    public LoanDTO readReserve(List<BookDTO> books, List<UserDTO> users) {
+    public LoanDTO readLoan(List<BookDTO> books, List<UserDTO> users) {
+
         return null;
     }
 
     @Override
     public void showAllBooks(List<BookDTO> books) {
-        String title = "Todos os livros"
+        String title = "Todos os livros";
         StringBuilder sb = new StringBuilder();
 
         sb.append("------------------------------------------------------------------------\n");
@@ -110,7 +111,7 @@ public class PanelView implements IView{
     }
 
     @Override
-    public void showReservedBooks(List<BookDTO> books) {
+    public void showLoanBooks(List<BookDTO> books) {
         //Deixei para tu, @caio, para poder usar o JTextArea e o JScrollPane.
 
         //Depois q tu fizer, precisamos criar uma função aqui, só para o JtextArea,
