@@ -13,11 +13,11 @@ public class UserDTO {
     private UserType userType;
     private int penalty;
 
-    public UserDTO(String name, String email, String phone, UserType userType) {
+    public UserDTO(String name, String email, String phone, String userType) {
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.userType = userType;
+        this.userType = userType.equals("Aluno") ? UserType.STUDENT : UserType.EMPLOYEE;
         this.penalty = 0;
     }
 

@@ -22,5 +22,9 @@ public interface IView {
 
     void showUserWithPenality(List<UserDTO> penalizeds);
 
-    void showLateBooking(List<LoanDTO> late);
+    void showLateBooking(List<LoanDTO> lateBooking);
+
+    void alertScreen(boolean success);
+
+    void showMessage(String message, String title);
 }
