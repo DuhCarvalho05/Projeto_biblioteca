@@ -2,6 +2,7 @@ package Controller;
 
 import DTO.BookDTO;
 import Model.Entity.Book;
+import Model.Service.BookService;
 import View.IView;
 import View.PanelView;
 
