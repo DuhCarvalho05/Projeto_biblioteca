@@ -2,7 +2,7 @@ package Model.Entity;
 
 import Model.UserType;
 
-public abstract class User {
+public abstract class User implements Comparable<User> {
     protected String name;
     protected String email;
     protected int phone;
@@ -39,4 +39,19 @@ public abstract class User {
 
     public abstract UserType getUserType();
 
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return email.equals(user.email);
+    }
+
+    @Override
+    public int compareTo(User user){
+        if (user != null) {
+            return this.equals(user) ? 0 : this.email.compareTo(user.email);
+        }
+        return 0;
+    }
 }

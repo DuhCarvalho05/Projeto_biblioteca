@@ -3,13 +3,15 @@ package Model.Dao;
 import Model.Entity.Book;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class BookDaoImpl implements BookDao{
     private static BookDaoImpl instance;
-    private static List<Book> dataset;
+    private static Set<Book> dataset;
 
     public BookDaoImpl(){
-        //TODO
+        dataset = new TreeSet<>();
     }
 
     public static BookDaoImpl getInstance(){
