@@ -39,13 +39,13 @@ public class LoanDaoImpl implements LoanDao{
     }
 
     @Override
-    public List<Loan> getByBook(Book book) {
+    public Loan getByBook(Book book) {
         //TODO
         return null;
     }
 
     @Override
-    public List<Loan> getByUser(User user) {
+    public Loan getByUser(User user) {
         return null;
     }
 }
