@@ -4,7 +4,7 @@ import Model.UserType;
 
 public class Student extends User{
 
-    public Student(String name, String email, int phone) {
+    public Student(String name, String email, String phone) {
         super(name, email, phone, 0);
     }
 

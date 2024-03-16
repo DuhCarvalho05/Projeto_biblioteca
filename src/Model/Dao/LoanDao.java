@@ -8,6 +8,6 @@ public interface LoanDao {
     boolean insert(Loan loan);
     boolean delete(Loan loan);
     List<Loan> getAll();
-    List<Loan> getByBook(Book book);
-    List<Loan> getByUser(User user);
+    Loan getByBook(Book book);
+    Loan getByUser(User user);
 }
