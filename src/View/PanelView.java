@@ -78,7 +78,11 @@ public class PanelView implements IView{
 
         sb.append("------------------------------------------------------------------------\n");
         for (LoanDTO reserved : reserveds){
-            //TO-DO
+            sb.append("Nome: ").append(reserved.getUser().getName());
+            sb.append("Titulo do livro: ").append(reserved.getBook().getTitle());
+            sb.append("Edição: ").append(reserved.getBook().getEdition());
+            sb.append("Data do emprestimo: ").append(reserved.getAcquiredDate());
+            sb.append("Data de devolução: ").append(reserved.getReturnDate());
             sb.append("------------------------------------------------------------------------\n");
         }
 
@@ -105,12 +109,12 @@ public class PanelView implements IView{
         StringBuilder sb = new StringBuilder();
 
         sb.append("------------------------------------------------------------------------\n");
-        for (UserDTO userP : penalizeds){
-            sb.append("Nome: ").append(userP.getName()).append("\n");
-            sb.append("E-mail: ").append(userP.getEmail()).append("\n");
-            sb.append("Telefone: ").append(userP.getTelefone()).append("\n");
-            sb.append("Tipo de usuário: ").append(userP.getUserType()).append("\n");
-            sb.append("Dias de penalidade restantes: ").append(userP.getPenalty()).append("\n");
+        for (UserDTO user : penalizeds){
+            sb.append("Nome: ").append(user.getName()).append("\n");
+            sb.append("E-mail: ").append(user.getEmail()).append("\n");
+            sb.append("Telefone: ").append(user.getPhone()).append("\n");
+            sb.append("Tipo de usuário: ").append(user.getUserType()).append("\n");
+            sb.append("Dias de penalidade restantes: ").append(user.getPenalty()).append("\n");
             sb.append("------------------------------------------------------------------------\n");
         }
 
@@ -132,12 +136,26 @@ public class PanelView implements IView{
     }
 
     @Override
-    public void showLateBooking(List<LoanDTO> late) {
-        String title = "Usuários sendo penalizados";
+    public void showLateBooking(List<LoanDTO> lateBooking) {
+        String title = "Usuários atrasados";
         StringBuilder sb = new StringBuilder();
 
         sb.append("------------------------------------------------------------------------\n");
-        for (){
+        for (LoanDTO late: lateBooking){
+            BookDTO book = late.getBook();
+            UserDTO user = late.getUser();
+
+            sb.append("Titulo: ").append(book.getTitle()).append("\n");
+            sb.append("Edição: ").append(book.getEdition()).append("\n");
+            sb.append("\n");
+            sb.append("Nome: ").append(user.getName()).append("\n");
+            sb.append("E-mail: ").append(user.getEmail()).append("\n");
+            sb.append("\n");
+
+            sb.append("Dias atrasados: ").append("\n");
+            sb.append("Dias até penalidade: ").append("\n");
+            sb.append("Dias de penalidade acumulados: ").append("\n");
+
             sb.append("------------------------------------------------------------------------\n");
         }
 
