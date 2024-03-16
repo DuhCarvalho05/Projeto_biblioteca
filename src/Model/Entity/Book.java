@@ -1,6 +1,6 @@
 package Model.Entity;
 
-public class Book {
+public class Book implements Comparable<Book> {
     private final String title;
     private final int edition;
     private final String author;
@@ -54,5 +54,21 @@ public class Book {
 
     public boolean isAvailable() {
         return isAvailable;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return edition == book.edition && title.equals(book.title);
+    }
+
+    @Override
+    public int compareTo(Book book){
+        if (book != null) {
+            return (this.title + this.edition).compareTo(book.title + book.edition);
+        }
+        return 0;
     }
 }
