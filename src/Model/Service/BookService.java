@@ -1,0 +1,29 @@
+package Model.Service;
+
+import Model.Dao.BookDao;
+import Model.Dao.BookDaoImpl;
+import Model.Entity.Book;
+
+import java.util.List;
+
+public class BookService {
+    private BookDao dao;
+
+    public BookService (){
+        this.dao = BookDaoImpl.getInstance();
+    }
+
+    public Boolean insert(Book book){
+        return dao.insert(book);
+    }
+    public Boolean delete(Book book){
+        return dao.delete(book);
+    }
+    public List<Book> getAll(){
+        return dao.getAll();
+    }
+    public Book getById(String title, int edition){
+        return dao.getById(title,edition);
+    }
+
+}

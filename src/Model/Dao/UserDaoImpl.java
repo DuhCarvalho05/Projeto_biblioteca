@@ -2,14 +2,17 @@ package Model.Dao;
 
 import Model.Entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class UserDaoImpl implements UserDao{
     private static UserDaoImpl instance;
-    private static List<User> dataset;
+    private static Set<User> dataset;
 
     public UserDaoImpl(){
-        //TODO
+        dataset = new TreeSet<>();
     }
 
     public static UserDaoImpl getInstance(){
@@ -21,8 +24,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public boolean insert(User user) {
-        //TODO
-        return false;
+        return dataset.add(user);
     }
 
     @Override
@@ -33,8 +35,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public List<User> getAll() {
-        //TODO
-        return null;
+        return new ArrayList<>(dataset);
     }
 
     @Override

@@ -10,14 +10,12 @@ public class BookDTO {
     private Boolean available;
     private int timesBorrowed;
 
-
-
-    public BookDTO(String title, int edition, String author, Boolean available, int timesBorrowed) {
+    public BookDTO(String title, int edition, String author) {
         this.title = title;
         this.edition = edition;
         this.author = author;
-        this.available = available;
-        this.timesBorrowed = timesBorrowed;
+        this.available = true;
+        this.timesBorrowed = 0;
     }
 
     public BookDTO(Book domain){

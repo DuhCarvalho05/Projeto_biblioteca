@@ -3,6 +3,7 @@ package View;
 import java.awt.*;
 import java.util.List;
 import DTO.*;
+import Model.Entity.User;
 import View.Enum.MenuOptions;
 
 import javax.swing.*;
@@ -10,27 +11,76 @@ import javax.swing.*;
 public class PanelView implements IView{
     @Override
     public MenuOptions showMenu() {
-        return null;
+        int option;
+        String[] options = {"Cadastrar livro", "Cadastrar usuário", "Empréstimo de livor", "Relatórios", "Sair"};
+        option = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "Sair");
+        return MenuOptions.values()[option];
     }
 
     @Override
     public UserDTO readUser() {
+        Panel panel = new Panel();
+
+        panel.setLayout(new GridLayout(4,1));
+
+        JTextField name = new JTextField();
+        JTextField email = new JTextField();
+        JTextField phone = new JTextField();
+        JTextField userType = new JTextField();
+
+        panel.add(new Label("Nome:"));
+        panel.add(name);
+        panel.add(new Label("Email:"));
+        panel.add(email);
+        panel.add(new Label("Telefone:"));
+        panel.add(phone);
+        panel.add(new Label("Tipo de usuário:"));
+        panel.add(userType);
+
+        int option = JOptionPane.showConfirmDialog(null, panel, "Cadastrar Usuário", JOptionPane.OK_CANCEL_OPTION);
+
+        if(option == JOptionPane.OK_OPTION){
+            return new UserDTO(name.getText(), email.getText(), phone.getText(), userType.getText());
+        }
+
         return null;
     }
 
     @Override
     public BookDTO readBook() {
+        Panel panel = new Panel();
+
+        panel.setLayout(new GridLayout(4,1));
+
+        JTextField title = new JTextField();
+        JTextField edition = new JTextField();
+        JTextField author = new JTextField();
+
+        panel.add(new Label("Titulo do livro:"));
+        panel.add(title);
+        panel.add(new Label("Edição:"));
+        panel.add(edition);
+        panel.add(new Label("Autor:"));
+        panel.add(author);
+
+        int option = JOptionPane.showConfirmDialog(null, panel, "Cadastrar Livro", JOptionPane.OK_CANCEL_OPTION);
+
+        if(option == JOptionPane.OK_OPTION){
+            return new BookDTO(title.getText(), Integer.parseInt(edition.getText()), author.getText());
+        }
+
         return null;
     }
 
     @Override
-    public ReserveDto readReserve(List<BookDTO> books, List<UserDTO> users) {
+    public LoanDTO readLoan(List<BookDTO> books, List<UserDTO> users) {
+
         return null;
     }
 
     @Override
     public void showAllBooks(List<BookDTO> books) {
-        String title = "Todos os livros"
+        String title = "Todos os livros";
         StringBuilder sb = new StringBuilder();
 
         sb.append("------------------------------------------------------------------------\n");
@@ -47,7 +97,7 @@ public class PanelView implements IView{
     }
 
     @Override
-    public void showReservedBooks(List<BookDTO> books) {
+    public void showLoanBooks(List<BookDTO> books) {
         //Deixei para tu, @caio, para poder usar o JTextArea e o JScrollPane.
         //TO-DO
     }
