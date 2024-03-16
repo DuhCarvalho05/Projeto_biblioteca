@@ -5,10 +5,10 @@ import Model.UserType;
 public abstract class User {
     protected String name;
     protected String email;
-    protected int phone;
+    protected String phone;
     protected int penalty;
 
-    public User(String name, String email, int phone, int penalty) {
+    public User(String name, String email, String phone, int penalty) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -27,7 +27,7 @@ public abstract class User {
         return email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 

@@ -9,11 +9,11 @@ public class UserDTO {
 
     private String name;
     private String email;
-    private int phone;
+    private String phone;
     private UserType userType;
     private int penalty;
 
-    public UserDTO(String name, String email, int phone, UserType userType, int penalty) {
+    public UserDTO(String name, String email, String phone, UserType userType, int penalty) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -53,11 +53,11 @@ public class UserDTO {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
