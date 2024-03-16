@@ -2,11 +2,13 @@ package View;
 
 import java.util.List;
 import DTO.*;
-import View.Enum.MenuOptions;
+import View.Enum.*;
 
 public interface IView {
 
     MenuOptions showMenu();
+
+    MenuLogs showMenuLogs();
 
     UserDTO readUser();
 

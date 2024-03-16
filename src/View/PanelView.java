@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import DTO.*;
-import View.Enum.MenuOptions;
+import View.Enum.*;
 
 import javax.swing.*;
 
@@ -16,6 +16,14 @@ public class PanelView implements IView{
         String[] options = {"Cadastrar livro", "Cadastrar usuário", "Empréstimo de livor", "Relatórios", "Sair"};
         option = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "Sair");
         return MenuOptions.values()[option];
+    }
+
+    @Override
+    public MenuLogs showMenuLogs() {
+        int option;
+        String[] options = {"Todos os livros", "Livros emprestados", "Usuários com livros", "Usuários penalizados", "Usuários atrasados"};
+        option = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "Usuários atrasados");
+        return MenuLogs.values()[option];
     }
 
     @Override
