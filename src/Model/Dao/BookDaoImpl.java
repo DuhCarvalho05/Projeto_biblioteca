@@ -2,13 +2,11 @@ package Model.Dao;
 
 import Model.Entity.Book;
 
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class BookDaoImpl implements BookDao{
     private static BookDaoImpl instance;
-    private static Set<Book> dataset;
+    private static Collection<Book> dataset;
 
     public BookDaoImpl(){
         dataset = new TreeSet<>();
@@ -23,25 +21,32 @@ public class BookDaoImpl implements BookDao{
 
     @Override
     public boolean insert(Book book) {
-        //TODO
+        if (book != null){
+            return dataset.add(book);
+        }
         return false;
     }
 
     @Override
     public boolean delete(Book book) {
-        //TODO
+        if (book != null){
+            return dataset.remove(book);
+        }
         return false;
     }
 
     @Override
     public List<Book> getAll() {
-        //TODO
-        return null;
+        return new ArrayList<>(dataset);
     }
 
     @Override
     public Book getById(String title, int edition) {
-        //TODO
+         for (Book b : dataset){
+             if ((b.getEdition() == edition) && b.getTitle().equals(title)){
+                 return b;
+             }
+         }
         return null;
     }
 }

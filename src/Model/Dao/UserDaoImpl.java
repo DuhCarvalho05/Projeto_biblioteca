@@ -2,14 +2,17 @@ package Model.Dao;
 
 import Model.Entity.User;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.TreeSet;
 
 public class UserDaoImpl implements UserDao{
     private static UserDaoImpl instance;
-    private static List<User> dataset;
+    private static Collection<User> dataset;
 
     public UserDaoImpl(){
-        //TODO
+        dataset =  new TreeSet<>();
     }
 
     public static UserDaoImpl getInstance(){
@@ -21,25 +24,33 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public boolean insert(User user) {
-        //TODO
+        if (user != null){
+         return dataset.add(user);
+        }
+
         return false;
     }
 
     @Override
     public boolean delete(User user) {
-        //TODO
+        if (user != null){
+            return dataset.remove(user);
+        }
         return false;
     }
 
     @Override
     public List<User> getAll() {
-        //TODO
-        return null;
+        return new ArrayList<>(dataset);
     }
 
     @Override
     public User getById(String email) {
-        //TODO
+        for (User u : dataset){
+            if (u.getEmail().equals(email)){
+                return u;
+            }
+        }
         return null;
     }
 }
