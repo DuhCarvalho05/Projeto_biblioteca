@@ -2,6 +2,8 @@ package View;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Objects;
+
 import DTO.*;
 import View.Enum.MenuOptions;
 
@@ -34,7 +36,7 @@ public class PanelView implements IView{
         panel.add(phone);
         panel.add(new Label("Tipo de usuário:"));
 
-        //I dont know if this will work, but I think it will. This is for limit the user to choose between "Aluno" and "Funcionário".
+        //I don't know if this will work, but I think it will. This is for limit the user to choose between "Aluno" and "Funcionário".
         //We need to test this.
         JComboBox<String> userType = new JComboBox<>();
         userType.addItem("Aluno");
@@ -45,7 +47,7 @@ public class PanelView implements IView{
         int option = JOptionPane.showConfirmDialog(null, panel, "Cadastrar Usuário", JOptionPane.OK_CANCEL_OPTION);
 
         if(option == JOptionPane.OK_OPTION){
-            return new UserDTO(name.getText(), email.getText(), phone.getText(), (String) userType.getSelectedItem());
+            return new UserDTO(name.getText(), email.getText(), phone.getText(), (String) Objects.requireNonNull(userType.getSelectedItem()));
         }
 
         return null;
