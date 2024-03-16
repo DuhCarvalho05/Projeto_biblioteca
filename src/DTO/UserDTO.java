@@ -13,12 +13,12 @@ public class UserDTO {
     private UserType userType;
     private int penalty;
 
-    public UserDTO(String name, String email, String phone, UserType userType, int penalty) {
+    public UserDTO(String name, String email, String phone, UserType userType) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.userType = userType;
-        this.penalty = penalty;
+        this.penalty = 0;
     }
 
     public UserDTO(User domain){
