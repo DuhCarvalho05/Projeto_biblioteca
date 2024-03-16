@@ -1,5 +1,7 @@
 package Model.Entity;
 
+import Model.UserType;
+
 public abstract class User {
     protected String name;
     protected String email;
@@ -32,4 +34,9 @@ public abstract class User {
     public void setPenalty(int penalty) {
         this.penalty = penalty;
     }
+
+    public abstract int getDeadline();
+
+    public abstract UserType getUserType();
+
 }
