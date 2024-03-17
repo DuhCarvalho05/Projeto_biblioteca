@@ -6,7 +6,7 @@ import java.util.*;
 
 public class BookDaoImpl implements BookDao{
     private static BookDaoImpl instance;
-    private static Collection<Book> dataset;
+    private final Collection<Book> dataset;
 
     public BookDaoImpl(){
         dataset = new TreeSet<>();

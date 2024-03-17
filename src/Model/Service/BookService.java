@@ -7,7 +7,7 @@ import Model.Entity.Book;
 import java.util.List;
 
 public class BookService {
-    private BookDao dao;
+    private final BookDao dao;
 
     public BookService (){
         this.dao = BookDaoImpl.getInstance();

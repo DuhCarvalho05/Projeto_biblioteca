@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 public class UserDaoImpl implements UserDao{
     private static UserDaoImpl instance;
-    private static Collection<User> dataset;
+    private final Collection<User> dataset;
 
     public UserDaoImpl(){
         dataset =  new TreeSet<>();
@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao{
     @Override
     public boolean insert(User user) {
         if (user != null){
-         return dataset.add(user);
+            return dataset.add(user);
         }
 
         return false;

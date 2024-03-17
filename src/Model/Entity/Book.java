@@ -32,24 +32,15 @@ public class Book implements Comparable<Book> {
         return timesBorrowed;
     }
 
-    public boolean setBorrow() {
-        if (!isAvailable())
-            return false;
-
-        timesBorrowed++;
-        return true;
+    public void setBorrow() {
+        if (isAvailable()){
+            timesBorrowed++;
+            isAvailable = false;
+        }
     }
 
     public void setTimesBorrowed(int timesBorrowed) {
         this.timesBorrowed = timesBorrowed;
-    }
-
-    public boolean setAvailability(boolean availability) {
-        if (isAvailable == availability)
-            return false;
-
-        isAvailable = availability;
-        return true;
     }
 
     public boolean isAvailable() {
@@ -67,9 +58,6 @@ public class Book implements Comparable<Book> {
     @Override
     public int compareTo(Book book){
         int result = this.getTitle().compareTo(book.getTitle());
-        if (result == 0)
-            return this.getEdition() - (book.getEdition());
-
-        return result;
+        return result == 0 ? this.getEdition() - (book.getEdition()) : result;
     }
 }

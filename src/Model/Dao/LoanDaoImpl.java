@@ -11,7 +11,7 @@ import java.util.TreeSet;
 
 public class LoanDaoImpl implements LoanDao{
     private static LoanDaoImpl instance;
-    private static Collection<Loan> dataset;
+    private final Collection<Loan> dataset;
 
     public LoanDaoImpl(){
          dataset = new TreeSet<>();
@@ -25,36 +25,22 @@ public class LoanDaoImpl implements LoanDao{
     }
 
     public boolean insert(Loan loan) {
-        return dataset.add(loan);
+        if (loan != null) {
+            return dataset.add(loan);
+        }
+        return false;
     }
 
     @Override
     public boolean delete(Loan loan) {
-       return dataset.remove(loan);
+        if (loan != null){
+            return dataset.remove(loan);
+        }
+       return false;
     }
 
     @Override
     public List<Loan> getAll() {
         return new ArrayList<>(dataset);
-    }
-
-    @Override
-    public Loan getByBook(Book book) {
-        for (Loan l : dataset){
-            if (l.getBook().equals(book)){
-                return l;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public Loan getByUser(User user) {
-        for (Loan l : dataset){
-            if (l.getBailee().equals(user)){
-                return l;
-            }
-        }
-        return null;
     }
 }

@@ -10,9 +10,10 @@ public class Loan implements Comparable<Loan>{
 
     public Loan(User bailee, Book book, LocalDate acquiredDate,
                 LocalDate returnDate) {
-        setBook(book);
-        setUser(bailee);
-        setDates(acquiredDate,returnDate);
+        if (setBook(book) && setUser(bailee) && setDates(acquiredDate,
+                returnDate)) {
+            borrowed.setBorrow();
+        }
     }
 
     public User getBailee() {
@@ -44,7 +45,7 @@ public class Loan implements Comparable<Loan>{
         }
         return false;
     }
-    private Boolean setDates( LocalDate acquiredDate, LocalDate returnDate){
+    private Boolean setDates(LocalDate acquiredDate, LocalDate returnDate){
         if (acquiredDate.isBefore(returnDate)){
             this.acquiredDate = acquiredDate;
             this.returnDate = returnDate;
@@ -52,7 +53,6 @@ public class Loan implements Comparable<Loan>{
         }
         return false;
     }
-
 
     @Override
     public boolean equals(Object o){
@@ -68,9 +68,7 @@ public class Loan implements Comparable<Loan>{
     public int compareTo(Loan loan){
         int yearDiff =
                 this.getReturnDate().getYear() - (loan.getReturnDate().getYear());
-        if (yearDiff == 0)
-            return this.getReturnDate().getDayOfYear() - (loan.getReturnDate().getDayOfYear());
-
-        return yearDiff;
+        return yearDiff == 0 ?
+                this.getReturnDate().getDayOfYear() - (loan.getReturnDate().getDayOfYear()) : yearDiff;
     }
 }

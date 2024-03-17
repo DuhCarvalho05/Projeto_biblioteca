@@ -1,6 +1,6 @@
 package Model.Entity;
 
-import Model.UserType;
+import Model.Enum.UserType;
 
 public class Employee extends User{
 

@@ -7,7 +7,7 @@ import Model.Entity.User;
 import java.util.List;
 
 public class UserService {
-    private UserDao dao;
+    private final UserDao dao;
 
     public UserService(){
         dao = UserDaoImpl.getInstance();

@@ -3,7 +3,7 @@ package DTO;
 import Model.Entity.Employee;
 import Model.Entity.Student;
 import Model.Entity.User;
-import Model.UserType;
+import Model.Enum.UserType;
 
 public class UserDTO {
 

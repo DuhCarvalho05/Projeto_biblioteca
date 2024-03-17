@@ -1,6 +1,6 @@
 package Model.Entity;
 
-import Model.UserType;
+import Model.Enum.UserType;
 
 public abstract class User implements Comparable<User> {
     protected String name;
@@ -49,6 +49,6 @@ public abstract class User implements Comparable<User> {
 
     @Override
     public int compareTo(User user){
-        return this.getEmail().compareTo(user.getEmail());
+        return user == null ? 0 : this.getEmail().compareTo(user.getEmail());
     }
 }
