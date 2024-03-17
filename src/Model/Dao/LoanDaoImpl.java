@@ -1,8 +1,6 @@
 package Model.Dao;
 
-import Model.Entity.Book;
 import Model.Entity.Loan;
-import Model.Entity.User;
 
 import java.util.ArrayList;
 import java.util.Collection;

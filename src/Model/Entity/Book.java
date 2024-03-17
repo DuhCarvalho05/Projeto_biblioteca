@@ -7,11 +7,11 @@ public class Book implements Comparable<Book> {
     private boolean isAvailable;
     private int timesBorrowed;
 
-    public Book(String title, int edition, String author,Boolean isAvailable, int timesBorrowed) {
+    public Book(String title, int edition, String author, boolean isAvailable, int timesBorrowed) {
         this.title = title;
         this.edition = edition;
         this.author = author;
-        this.isAvailable = true;
+        this.isAvailable = isAvailable;
         this.timesBorrowed = timesBorrowed;
 
     }
