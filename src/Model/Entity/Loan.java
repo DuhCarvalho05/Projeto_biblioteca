@@ -37,18 +37,18 @@ public class Loan implements Comparable<Loan>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Loan loan = (Loan) o;
-        return this.equals(loan) && this.bailee.equals(loan.bailee) &&
+        return this.bailee.equals(loan.bailee) &&
                 this.borrowed.equals(loan.borrowed) &&
-                this.acquiredDate.getDayOfYear() == loan.acquiredDate.getDayOfYear() &&
-                this.returnDate.getDayOfYear() == loan.returnDate.getDayOfYear();
+                this.acquiredDate.getDayOfYear() == loan.acquiredDate.getDayOfYear() && this.acquiredDate.getYear() == loan.acquiredDate.getYear();
     }
 
     @Override
     public int compareTo(Loan loan){
-        if (loan != null) {
-            return this.equals(loan) ? 0 :
-                    this.returnDate.getDayOfYear() - loan.returnDate.getDayOfYear();
-        }
-        return 0;
+        int yearDiff =
+                this.getReturnDate().getYear() - (loan.getReturnDate().getYear());
+        if (yearDiff == 0)
+            return this.getReturnDate().getDayOfYear() - (loan.getReturnDate().getDayOfYear());
+
+        return yearDiff;
     }
 }

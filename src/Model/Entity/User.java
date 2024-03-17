@@ -49,9 +49,6 @@ public abstract class User implements Comparable<User> {
 
     @Override
     public int compareTo(User user){
-        if (user != null) {
-            return this.equals(user) ? 0 : this.email.compareTo(user.email);
-        }
-        return 0;
+        return this.getEmail().compareTo(user.getEmail());
     }
 }
