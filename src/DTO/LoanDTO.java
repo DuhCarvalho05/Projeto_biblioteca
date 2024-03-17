@@ -19,6 +19,14 @@ public class LoanDTO {
         this.late = late;
     }
 
+    public LoanDTO(UserDTO user, BookDTO book){
+        this.user = user;
+        this.book = book;
+        acquiredDate = LocalDate.now();
+        returnDate = acquiredDate.plusDays(14);
+        late = false;
+    }
+
     public Loan toDomain() {
         return  new Loan(user.toDomain(), book.toDomain(), acquiredDate, returnDate);
     }

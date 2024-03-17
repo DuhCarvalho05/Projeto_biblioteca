@@ -1,8 +1,8 @@
 package View;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import DTO.*;
 import View.Enum.*;
@@ -44,18 +44,14 @@ public class PanelView implements IView{
         panel.add(phone);
         panel.add(new Label("Tipo de usuário:"));
 
-        //I don't know if this will work, but I think it will. This is for limit the user to choose between "Aluno" and "Funcionário".
-        //We need to test this.
-        JComboBox<String> userType = new JComboBox<>();
-        userType.addItem("Aluno");
-        userType.addItem("Funcionário");
+        JList<String> userType = new JList<>(new String[]{"Aluno", "Professor"});
 
         panel.add(userType);
 
         int option = JOptionPane.showConfirmDialog(null, panel, "Cadastrar Usuário", JOptionPane.OK_CANCEL_OPTION);
 
         if(option == JOptionPane.OK_OPTION){
-            return new UserDTO(name.getText(), email.getText(), phone.getText(), (String) Objects.requireNonNull(userType.getSelectedItem()));
+            return new UserDTO(name.getText(), email.getText(), phone.getText(), userType.getSelectedValue());
         }
 
         return null;
@@ -89,32 +85,40 @@ public class PanelView implements IView{
 
     @Override
     public LoanDTO readLoan(List<BookDTO> books, List<UserDTO> users) {
+        List<String> userNames = new ArrayList<>();
+        List<String> bookTitles = new ArrayList<>();
 
-        return null;
+        for (UserDTO user : users) {
+            userNames.add(user.getName());
+        }
+
+        for (BookDTO book : books) {
+            //Show title and edition
+            bookTitles.add(book.getTitle() + " | Edição: " + book.getEdition());
+        }
+
+        JList<String> userJList = new JList<>(userNames.toArray(new String[0]));
+        JList<String> bookJList = new JList<>(bookTitles.toArray(new String[0]));
+
+        JOptionPane.showMessageDialog(null, userJList, "Lista de usuários", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, bookJList, "Lista de livros", JOptionPane.PLAIN_MESSAGE);
+
+        UserDTO user = users.get(userJList.getSelectedIndex());
+        BookDTO book = books.get(bookJList.getSelectedIndex());
+
+        return new LoanDTO(user, book);
     }
 
     @Override
     public void showAllBooks(List<BookDTO> books) {
         String title = "Todos os livros";
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("------------------------------------------------------------------------\n");
-        for (BookDTO book : books){
-            sb.append("Titulo: ").append(book.getTitle()).append("\n");
-            sb.append("Edição: ").append(book.getEdition()).append("\n");
-            sb.append("Autor: ").append(book.getAuthor()).append("\n");
-            sb.append("Está disponível: ").append(book.isAvailable() ? "Sim" : "Não").append("\n");
-            sb.append("Vezes emprestado: ").append(book.getTimesBorrowed()).append("\n");
-            sb.append("------------------------------------------------------------------------\n");
-        }
-
-        JOptionPane.showMessageDialog(null, panelBuilder(sb), title, JOptionPane.PLAIN_MESSAGE);
+        booksPainelBuilder(books, title);
     }
 
     @Override
     public void showLoanBooks(List<BookDTO> books) {
-        //Deixei para tu, @caio, para poder usar o JTextArea e o JScrollPane.
-        //TO-DO
+        String title = "Livros emprestados";
+        booksPainelBuilder(books, title);
     }
 
     @Override
@@ -224,5 +228,21 @@ public class PanelView implements IView{
         panel.add(scrollPane);
 
         return panel;
+    }
+
+    private static void booksPainelBuilder(List<BookDTO> books, String title) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("------------------------------------------------------------------------\n");
+        for (BookDTO book : books){
+            sb.append("Titulo: ").append(book.getTitle()).append("\n");
+            sb.append("Edição: ").append(book.getEdition()).append("\n");
+            sb.append("Autor: ").append(book.getAuthor()).append("\n");
+            sb.append("Está disponível: ").append(book.isAvailable() ? "Sim" : "Não").append("\n");
+            sb.append("Vezes emprestado: ").append(book.getTimesBorrowed()).append("\n");
+            sb.append("------------------------------------------------------------------------\n");
+        }
+
+        JOptionPane.showMessageDialog(null, panelBuilder(sb), title, JOptionPane.PLAIN_MESSAGE);
     }
 }
