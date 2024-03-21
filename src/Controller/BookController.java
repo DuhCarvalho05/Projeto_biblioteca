@@ -14,20 +14,14 @@ public class BookController {
     BookService service;
     IView view;
 
-    public BookController() {
+    public BookController(IView view) {
         service = new BookService();
-        view = new PanelView();
+        this.view = view;
     }
 
     public void createBook(){
-
         var book = view.readBook();
-
-        if(service.create(book.toDomain())){
-            view.succes();
-        }else{
-            view.fail();
-        }
+        view.alertScreen(service.insert(book.toDomain()));
     }
 
     public void getAll(){

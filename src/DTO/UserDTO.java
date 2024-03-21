@@ -1,9 +1,13 @@
 package DTO;
 
+import Model.Entity.Book;
 import Model.Entity.Employee;
 import Model.Entity.Student;
 import Model.Entity.User;
 import Model.Enum.UserType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDTO {
 
@@ -36,6 +40,16 @@ public class UserDTO {
         }
         return null;
     }
+
+    public static List<UserDTO> toDomain(List<User> users) {
+        List<UserDTO> usersDTO = new ArrayList<>();
+        for (User user : users) {
+            usersDTO.add(new UserDTO(user));
+        }
+
+        return usersDTO;
+    }
+
 
     public String getName() {
         return name;
