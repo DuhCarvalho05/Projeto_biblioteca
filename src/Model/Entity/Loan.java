@@ -15,6 +15,9 @@ public class Loan implements Comparable<Loan>{
             borrowed.setBorrow();
         }
     }
+    public Boolean isDelayed(){
+        return getReturnDate().isBefore(LocalDate.now());
+    }
 
     public User getBailee() {
         return bailee;
