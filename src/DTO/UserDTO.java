@@ -30,6 +30,7 @@ public class UserDTO {
         this.email = domain.getEmail();
         this.phone = domain.getPhone();
         this.penalty = domain.getPenalty();
+        this.userType = domain.getUserType();
     }
 
     public User toDomain(){

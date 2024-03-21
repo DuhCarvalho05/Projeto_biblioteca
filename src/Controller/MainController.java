@@ -47,13 +47,15 @@ public class MainController {
                     userController.createUser();
                     break;
                 case RESERVE_BOOK:
-
+                    loanController.createLoan();
                     break;
                 case LOGS:
                     showLogs();
                     break;
                 case QUIT:
                     stop = true;
+                    break;
+                default:
                     break;
             }
         }
@@ -76,6 +78,8 @@ public class MainController {
                 break;
             case LATE_BOOKING:
 
+                break;
+            default:
                 break;
         }
     }

@@ -31,7 +31,11 @@ public class LoanController {
         var usersDTO = UserDTO.toDomain(userService.getAll());
         var loan = view.readLoan(booksDTO, usersDTO);
 
-        view.alertScreen(loanService.insert(loan.toDomain()));
+        if(loan == null) {
+            view.showMessage("Operação cancelada", "Operação cancelada");
+        } else {
+            view.alertScreen(loanService.insert(loan.toDomain()));
+        }
     }
 
     public void getAll() {

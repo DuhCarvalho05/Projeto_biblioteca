@@ -21,7 +21,11 @@ public class BookController {
 
     public void createBook(){
         var book = view.readBook();
-        view.alertScreen(service.insert(book.toDomain()));
+        if(book == null) {
+            view.showMessage("Operação cancelada", "Operação cancelada");
+        } else {
+            view.alertScreen(service.insert(book.toDomain()));
+        }
     }
 
     public void getAll(){

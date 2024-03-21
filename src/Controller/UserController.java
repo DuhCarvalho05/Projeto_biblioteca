@@ -20,7 +20,12 @@ public class UserController {
 
     public void createUser() {
         var user = view.readUser();
-        view.alertScreen(service.insert(user.toDomain()));
+
+        if(user == null) {
+            view.showMessage("Operação cancelada", "Operação cancelada");
+        } else {
+            view.alertScreen(service.insert(user.toDomain()));
+        }
     }
 
 }
