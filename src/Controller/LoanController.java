@@ -19,11 +19,11 @@ public class LoanController {
     UserService userService;
     IView view;
 
-    public LoanController() {
+    public LoanController(IView view) {
         this.loanService = new LoanService();
         this.bookService = new BookService();
         this.userService = new UserService();
-        this.view = new PanelView();
+        this.view = view;
     }
 
     public void createLoan() {
@@ -36,6 +36,15 @@ public class LoanController {
 
     public void getAll() {
         var booksDTO = BookDTO.toDomain(bookService.getAll());
-        view.showLoanBooks();
+        view.showLoanBooks(booksDTO);
+    }
+
+    public void getAllUsers() {
+        var loanDTO = LoanDTO.toDomain(loanService.getAll());
+        view.showUserWithBook(loanDTO);
+    }
+
+    public void getAllPenalizedUsers() {
+        var usersDTO = UserDTO.toDomain(userService.getAll());
     }
 }

@@ -14,9 +14,9 @@ public class BookController {
     BookService service;
     IView view;
 
-    public BookController() {
+    public BookController(IView view) {
         service = new BookService();
-        view = new PanelView();
+        this.view = view;
     }
 
     public void createBook(){

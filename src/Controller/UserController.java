@@ -13,9 +13,9 @@ public class UserController {
     UserService service;
     IView view;
 
-    public UserController() {
+    public UserController(IView view) {
         service = new UserService();
-        view = new PanelView();
+        this.view = view;
     }
 
     public void createUser() {
