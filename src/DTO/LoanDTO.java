@@ -1,8 +1,11 @@
 package DTO;
 
+import Model.Entity.Book;
 import Model.Entity.Loan;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoanDTO {
     private UserDTO user;
@@ -31,6 +34,14 @@ public class LoanDTO {
         return  new Loan(user.toDomain(), book.toDomain(), acquiredDate, returnDate);
     }
 
+    public static List<LoanDTO> toDomain(List<Loan> loans) {
+        List<LoanDTO> loansDTO = new ArrayList<>();
+        for (Loan loan : loans) {
+            loansDTO.add(new LoanDTO(new UserDTO(loan.getBailee()), new BookDTO(loan.getBook()), loan.getAcquiredDate(), loan.getReturnDate(), loan.isDelayed()));
+        }
+
+        return loansDTO;
+    }
     public UserDTO getUser() {
         return user;
     }

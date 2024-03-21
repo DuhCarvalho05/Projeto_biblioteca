@@ -20,14 +20,8 @@ public class BookController {
     }
 
     public void createBook(){
-
         var book = view.readBook();
-
-        if(service.create(book.toDomain())){
-            view.succes();
-        }else{
-            view.fail();
-        }
+        view.alertScreen(service.insert(book.toDomain()));
     }
 
     public void getAll(){

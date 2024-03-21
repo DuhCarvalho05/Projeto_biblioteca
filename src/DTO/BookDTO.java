@@ -2,6 +2,10 @@ package DTO;
 
 import Model.Entity.Book;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class BookDTO {
 
     private String title;
@@ -28,6 +32,15 @@ public class BookDTO {
 
     public Book toDomain(){
         return new Book(title, edition, author, available, timesBorrowed);
+    }
+
+    public static List<BookDTO> toDomain(List<Book> books) {
+        List<BookDTO> booksDTO = new ArrayList<>();
+        for (Book book : books) {
+            booksDTO.add(new BookDTO(book));
+        }
+
+        return booksDTO;
     }
 
     public String getTitle() {
