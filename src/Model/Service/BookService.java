@@ -20,8 +20,6 @@ public class BookService {
         return dao.delete(book);
     }
 
-
-
     public List<Book> getAll(){
         return dao.getAll();
     }
