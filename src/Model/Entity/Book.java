@@ -13,7 +13,6 @@ public class Book implements Comparable<Book> {
         this.author = author;
         this.isAvailable = isAvailable;
         this.timesBorrowed = timesBorrowed;
-
     }
 
     public String getTitle() {

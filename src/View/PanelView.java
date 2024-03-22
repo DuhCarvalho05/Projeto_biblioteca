@@ -13,7 +13,7 @@ public class PanelView implements IView{
     @Override
     public MenuOptions showMenu() {
         int option;
-        String[] options = {"Cadastrar livro", "Cadastrar usuário", "Empréstimo de livor", "Relatórios", "Sair"};
+        String[] options = {"Cadastrar livro", "Cadastrar usuário", "Empréstimo de livros", "Relatórios", "Sair"};
         option = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "Sair");
         return MenuOptions.values()[option];
     }
@@ -21,7 +21,7 @@ public class PanelView implements IView{
     @Override
     public MenuLogs showMenuLogs() {
         int option;
-        String[] options = {"Todos os livros", "Livros emprestados", "Usuários com livros", "Usuários penalizados", "Usuários atrasados"};
+        String[] options = {"Todos os livros", "Livros emprestados", "Usuários com livros", "Usuários penalizados", "Usuários atrasados", "Voltar"};
         option = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "Usuários atrasados");
         return MenuLogs.values()[option];
     }
@@ -132,11 +132,11 @@ public class PanelView implements IView{
             BookDTO book = reserved.getBook();
             UserDTO user = reserved.getUser();
 
-            sb.append("Nome: ").append(user.getName());
-            sb.append("Titulo do livro: ").append(book.getTitle());
-            sb.append("Edição: ").append(book.getEdition());
-            sb.append("Data do emprestimo: ").append(reserved.getAcquiredDate());
-            sb.append("Data de devolução: ").append(reserved.getReturnDate());
+            sb.append("Nome: ").append(user.getName()).append("\n");
+            sb.append("Titulo do livro: ").append(book.getTitle()).append("\n");
+            sb.append("Edição: ").append(book.getEdition()).append("\n");
+            sb.append("Data do emprestimo: ").append(reserved.getAcquiredDate()).append("\n");
+            sb.append("Data de devolução: ").append(reserved.getReturnDate()).append("\n");
             sb.append("------------------------------------------------------------------------\n");
         }
 
