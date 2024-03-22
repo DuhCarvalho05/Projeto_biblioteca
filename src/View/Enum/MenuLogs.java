@@ -6,7 +6,8 @@ public enum MenuLogs {
     RESERVED_BOOKS(1),
     USER_WITH_BOOK(2),
     USER_WITH_PENALITY(3),
-    LATE_BOOKING(4);
+    LATE_BOOKING(4),
+    RETURN(5);
 
     private final int value;
 
