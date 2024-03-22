@@ -70,9 +70,9 @@ public class Loan implements Comparable<Loan>{
     @Override
     public int compareTo(Loan loan){
         if (this.equals(loan)) return 0;
-        int yearDiff =
-                this.getReturnDate().getYear() - (loan.getReturnDate().getYear());
-        return yearDiff == 0 ?
-                this.getReturnDate().getDayOfYear() - (loan.getReturnDate().getDayOfYear()) : yearDiff;
+        if (this.borrowed.equals(loan.borrowed)){
+            return this.acquiredDate.compareTo(loan.acquiredDate);
+        }
+        return this.borrowed.compareTo(loan.borrowed);
     }
 }

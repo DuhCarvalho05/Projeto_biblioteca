@@ -76,8 +76,8 @@ public class UserDTO {
         this.phone = phone;
     }
 
-    public UserType getUserType() {
-        return userType;
+    public String getUserType() {
+        return userType.getValue();
     }
 
     public void setUserType(UserType userType) {
