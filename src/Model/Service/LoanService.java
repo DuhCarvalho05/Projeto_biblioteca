@@ -75,13 +75,21 @@ public class LoanService {
         return loans;
     }
 
-    public List<Book> getLateLoans() {
-        ArrayList <Book> books = new ArrayList<>();
+    private List<Loan> getLateLoans() {
+        ArrayList <Loan> loans = new ArrayList<>();
         for (Loan l : loanDao.getAll()){
             if (l.isDelayed()){
-                books.add(l.getBook());
+                loans.add(l);
             }
         }
-        return books;
+        return loans;
+    }
+
+    public List<Book> getLateBooks() {
+        ArrayList <Book> lateBooks = new ArrayList<>();
+        for(Loan l : getLateLoans()){
+            lateBooks.add(l.getBook());
+        }
+        return lateBooks;
     }
 }
