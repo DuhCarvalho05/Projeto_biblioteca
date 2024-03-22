@@ -1,15 +1,15 @@
 package Model.Enum;
 
 public enum UserType {
-    EMPLOYEE(1),
-    STUDENT(2);
+    EMPLOYEE("Funcionário"),
+    STUDENT("Estudante");
 
-    private final int value;
-    UserType(int value) {
+    private final String value;
+    UserType(String value) {
         this.value = value;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 

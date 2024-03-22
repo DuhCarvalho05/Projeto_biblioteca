@@ -28,6 +28,16 @@ public class BookDaoImpl implements BookDao{
     }
 
     @Override
+    public boolean update(Book book) {
+        if (book != null){
+            if (dataset.remove(book))
+                book.setBorrow();
+            return dataset.add(book);
+        }
+        return false;
+    }
+
+    @Override
     public boolean delete(Book book) {
         if (book != null){
             return dataset.remove(book);

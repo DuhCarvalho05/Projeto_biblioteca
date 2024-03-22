@@ -24,8 +24,8 @@ public class LoanService {
         this.userDao = UserDaoImpl.getInstance();
     }
 
-    public Boolean insert(Loan loan){
-       return loanDao.insert(loan);
+    public Boolean insert(Loan loan){;
+        return loanDao.insert(loan) && bookDao.update(loan.getBook());
     }
     public Boolean delete(Loan loan){
         return loanDao.delete(loan);
