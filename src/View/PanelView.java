@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,18 +13,32 @@ import javax.swing.*;
 public class PanelView implements IView{
     @Override
     public MenuOptions showMenu() {
-        int option;
+        Object option;
         String[] options = {"Cadastrar livro", "Cadastrar usuário", "Empréstimo de livros", "Relatórios", "Sair"};
-        option = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "Sair");
-        return MenuOptions.values()[option];
+        option = JOptionPane.showInputDialog(null, "Escolha uma opção", "Menu", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+        for (int i = 0; i < options.length; i++) {
+            if (options[i].equals(option)){
+                return MenuOptions.values()[i];
+            }
+        }
+
+        return null;
     }
 
     @Override
     public MenuLogs showMenuLogs() {
-        int option;
+        Object option;
         String[] options = {"Todos os livros", "Livros emprestados", "Usuários com livros", "Usuários penalizados", "Usuários atrasados", "Voltar"};
-        option = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "Usuários atrasados");
-        return MenuLogs.values()[option];
+        option = JOptionPane.showInputDialog(null, "Escolha uma opção", "Menu", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+        for (int i = 0; i < options.length; i++) {
+            if (options[i].equals(option)){
+                return MenuLogs.values()[i];
+            }
+        }
+
+        return null;
     }
 
     @Override
@@ -126,6 +141,8 @@ public class PanelView implements IView{
         String title = "Livros emprestados";
         StringBuilder sb = new StringBuilder();
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         sb.append("------------------------------------------------------------------------\n");
         for (LoanDTO reserved : reserveds){
 
@@ -135,8 +152,8 @@ public class PanelView implements IView{
             sb.append("Nome: ").append(user.getName()).append("\n");
             sb.append("Titulo do livro: ").append(book.getTitle()).append("\n");
             sb.append("Edição: ").append(book.getEdition()).append("\n");
-            sb.append("Data do emprestimo: ").append(reserved.getAcquiredDate()).append("\n");
-            sb.append("Data de devolução: ").append(reserved.getReturnDate()).append("\n");
+            sb.append("Data do emprestimo: ").append(reserved.getAcquiredDate().format(formatter)).append("\n");
+            sb.append("Data de devolução: ").append(reserved.getReturnDate().format(formatter)).append("\n");
             sb.append("------------------------------------------------------------------------\n");
         }
 
