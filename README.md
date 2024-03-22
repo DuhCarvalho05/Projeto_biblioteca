@@ -7,4 +7,4 @@ Projeto com o objetivo de desenvolver um sistema simples de gerenciamente de bib
 - Cauã Rufino de Sá
 - Eduardo P Carvalho
 - Igor Filipi
-- Lucas Alcântra
+- Lucas Alcantara
