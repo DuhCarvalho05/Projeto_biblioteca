@@ -1,5 +1,7 @@
 # Projeto biblioteca
-Projeto com o objetivo de desenvolver um sistema simples de gerenciamente de biblioca, com cadastro de usuário, livros, empréstimos, etc.
+O presente projeto faz parte dos exercícios da disciplina de Desenvolvimento Orientado a Objeto (DEOO). O objetivo da atividade é desenvolver um sistema de gerenciamento de uma biblioteca utilizando padrão de arquitetura de projeto em camadas, MVC (Model View Controller) orientado a Controller. Faz parte dos requisitos utilizar de padrões de projeto (Design Patterns).
+
+# Desenvolvimento
 
 ## Integrantes
 - Augusto G Serrano
