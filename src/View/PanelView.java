@@ -115,8 +115,28 @@ public class PanelView implements IView{
         JList<String> userJList = new JList<>(userNames.toArray(new String[0]));
         JList<String> bookJList = new JList<>(bookTitles.toArray(new String[0]));
 
-        JOptionPane.showMessageDialog(null, userJList, "Lista de usuários", JOptionPane.PLAIN_MESSAGE);
-        JOptionPane.showMessageDialog(null, bookJList, "Lista de livros", JOptionPane.PLAIN_MESSAGE);
+        userJList.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        bookJList.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        //Make user list more pretty
+        userJList.setLayoutOrientation(JList.VERTICAL);
+        userJList.setVisibleRowCount(-1);
+
+        //Make book list more pretty
+        bookJList.setLayoutOrientation(JList.VERTICAL);
+        bookJList.setVisibleRowCount(-1);
+
+        Panel panel = new Panel();
+
+        panel.setLayout(new GridLayout(3,1));
+        panel.add(new Label("Selecione o usuário:"));
+        panel.add(userJList);
+        panel.add(new Label(""));
+        panel.add(new Label(""));
+        panel.add(new Label("Selecione o livro:"));
+        panel.add(bookJList);
+
+        JOptionPane.showConfirmDialog(null, panel, "Emprestimo de livro", JOptionPane.OK_CANCEL_OPTION);
 
         UserDTO user = users.get(userJList.getSelectedIndex());
         BookDTO book = books.get(bookJList.getSelectedIndex());
