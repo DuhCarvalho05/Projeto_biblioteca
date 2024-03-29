@@ -156,6 +156,31 @@ public class PanelView implements IView{
         return new LoanDTO(user, book);
     }
 
+    public LoanDTO returnBook(List<LoanDTO> loanBooks){
+        List<String> loandedBooks = new ArrayList<>();
+
+        for (LoanDTO loan : loanBooks) {
+            loandedBooks.add(loan.getUser().getName() + "\n" + loan.getBook().getTitle() + " | Edição: " + loan.getBook().getEdition());
+        }
+
+        JList<String> loandedList = new JList<>(loandedBooks.toArray(new String[0]));
+
+        loandedList.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        loandedList.setLayoutOrientation(JList.VERTICAL);
+        loandedList.setVisibleRowCount(-1);
+
+        Panel panel = new Panel();
+
+        panel.setLayout(new GridLayout(3,1));
+        panel.add(new Label("Selecione o usuário que está devolvendo o livro:"));
+        panel.add(loandedList);
+
+        JOptionPane.showConfirmDialog(null, panel, "Devolução de livro", JOptionPane.OK_CANCEL_OPTION);
+
+        return loanBooks.get(loandedList.getSelectedIndex());
+    }
+
+
     @Override
     public void showAllBooks(List<BookDTO> books) {
         String title = "Todos os livros";

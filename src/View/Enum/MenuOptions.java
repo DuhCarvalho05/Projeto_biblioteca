@@ -5,6 +5,7 @@ public enum MenuOptions {
     INSERT_BOOK("Adicionar livro"),
     INSERT_USER("Adicionar usuário"),
     RESERVE_BOOK("Reservar livro"),
+    RETURN_BOOK("Devolver livro"),
     LOGS("Relatórios"),
     QUIT("Sair");
 
@@ -17,8 +18,5 @@ public enum MenuOptions {
     public String getValue() {
         return value;
     }
-
-
-
 
 }
