@@ -35,9 +35,9 @@ public class UserDTO {
 
     public User toDomain(){
         if(userType == UserType.EMPLOYEE){
-            return new Student(name, email, phone);
-        } else if (userType == UserType.STUDENT) {
             return new Employee(name, email, phone);
+        } else if (userType == UserType.STUDENT) {
+            return new Student(name, email, phone);
         }
         return null;
     }
@@ -56,39 +56,22 @@ public class UserDTO {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public String getUserType() {
         return userType.getValue();
     }
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
 
     public int getPenalty() {
         return penalty;
     }
 
-    public void setPenalty(int penalty) {
-        this.penalty = penalty;
-    }
 }

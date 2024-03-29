@@ -4,7 +4,6 @@ import DTO.BookDTO;
 import Model.Entity.Book;
 import Model.Service.BookService;
 import View.IView;
-import View.PanelView;
 
 import java.util.ArrayList;
 import java.util.List;

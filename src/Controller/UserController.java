@@ -1,13 +1,8 @@
 package Controller;
 
 import DTO.UserDTO;
-import Model.Entity.User;
 import Model.Service.UserService;
 import View.IView;
-import View.PanelView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserController {
     UserService service;
@@ -26,6 +21,11 @@ public class UserController {
         } else {
             view.alertScreen(service.insert(user.toDomain()));
         }
+    }
+
+    public void getAllPenalized() {
+        var usersDTO = UserDTO.toDomain(service.getAll());
+        view.showUserWithPenality(usersDTO);
     }
 
 }

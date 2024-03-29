@@ -39,16 +39,12 @@ public class LoanController {
     }
 
     public void getAll() {
-        var booksDTO = BookDTO.toDomain(bookService.getAll());
-        view.showLoanBooks(booksDTO);
+        var loansDTO = LoanDTO.toDomain(loanService.getAll());
+        view.showUserWithBook(loansDTO);
     }
 
-    public void getAllUsers() {
-        var loanDTO = LoanDTO.toDomain(loanService.getAll());
-        view.showUserWithBook(loanDTO);
-    }
-
-    public void getAllPenalizedUsers() {
-        var usersDTO = UserDTO.toDomain(userService.getAll());
+    public void getAllLateLoans() {
+        var lateBooking = LoanDTO.toDomain(loanService.getLateLoans());
+        view.showLateBooking(lateBooking);
     }
 }

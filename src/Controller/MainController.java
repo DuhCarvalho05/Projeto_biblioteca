@@ -4,7 +4,6 @@ import Model.Dao.*;
 import Model.Entity.Book;
 import Model.Entity.Employee;
 import Model.Entity.Student;
-import Model.Entity.User;
 import View.IView;
 import View.PanelView;
 
@@ -15,7 +14,6 @@ public class MainController {
     private UserController userController;
 
     private BookDao bookDao;
-    private LoanDao loanDao;
     private UserDao userDao;
 
     IView view;
@@ -27,14 +25,13 @@ public class MainController {
         userController = new UserController(view);
 
         bookDao = BookDaoImpl.getInstance();
-        loanDao = LoanDaoImpl.getInstance();
         userDao = UserDaoImpl.getInstance();
 
 
     }
 
     public void run() {
-        Boolean stop = false;
+        boolean stop = false;
 
         load();
 
@@ -68,16 +65,16 @@ public class MainController {
                 bookController.getAll();
                 break;
             case RESERVED_BOOKS:
-
+                bookController.getAll();
                 break;
             case USER_WITH_BOOK:
-                loanController.getAllUsers();
+                loanController.getAll();
                 break;
             case USER_WITH_PENALITY:
-
+                userController.getAllPenalized();
                 break;
             case LATE_BOOKING:
-
+                loanController.getAllLateLoans();
                 break;
             default:
                 break;
@@ -92,7 +89,6 @@ public class MainController {
 
         userDao.insert(new Employee("Ednilson", "ednilsonrossi@gmail.com", "123456789"));
         userDao.insert(new Employee("Furquim", "furquim@gmail.com", "987654321"));
-
         userDao.insert(new Student("Augusto", "guto@gmail.com", "1111111111"));
         userDao.insert(new Student("Caio", "caio@gmail.com", "222222222"));
 
