@@ -92,4 +92,12 @@ public class LoanService {
         }
         return lateBooks;
     }
+
+    public List<User> getLateUsers() {
+        ArrayList <User> lateUsers = new ArrayList<>();
+        for(Loan l : getLateLoans()){
+            lateUsers.add(l.getBailee());
+        }
+        return lateUsers;
+    }
 }
