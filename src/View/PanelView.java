@@ -267,8 +267,6 @@ public class PanelView implements IView{
         return panel;
     }
 
-    //Teste
-
     private static void booksPainelBuilder(List<BookDTO> books, String title) {
         StringBuilder sb = new StringBuilder();
 
