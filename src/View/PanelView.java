@@ -13,17 +13,29 @@ import javax.swing.*;
 public class PanelView implements IView{
     @Override
     public MenuOptions showMenu() {
-        Object option;
-        String[] options = {"Cadastrar livro", "Cadastrar usuário", "Empréstimo de livros", "Relatórios", "Sair"};
-        option = JOptionPane.showInputDialog(null, "Escolha uma opção", "Menu", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        String option;
+        Panel panel = new Panel();
 
-        for (int i = 0; i < options.length; i++) {
-            if (options[i].equals(option)){
-                return MenuOptions.values()[i];
+        panel.setLayout(new GridLayout(1,1));
+
+        JComboBox<String> comboBox = new JComboBox<>();
+        for (MenuOptions menuOption : MenuOptions.values())
+            comboBox.addItem(menuOption.getValue());
+
+        comboBox.addItem("AAAA");
+
+        panel.add(comboBox);
+
+        JOptionPane.showMessageDialog(null, panel, "Menu", JOptionPane.QUESTION_MESSAGE);
+        option = (String) comboBox.getSelectedItem();
+
+        for (MenuOptions menuOption : MenuOptions.values()) {
+            if (menuOption.getValue().equals(option)){
+                return menuOption;
             }
         }
 
-        return null;
+        throw new IllegalArgumentException("Invalid value: " + option);
     }
 
     @Override
