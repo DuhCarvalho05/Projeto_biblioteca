@@ -39,7 +39,7 @@ public class PanelView implements IView{
     }
 
     @Override
-    public MenuLogs showMenuLogs() {
+    public MenuLogs showMenuLogs() throws IllegalArgumentException {
         Object option;
         String[] options = {"Todos os livros", "Livros emprestados", "Usuários com livros", "Usuários penalizados", "Usuários atrasados", "Voltar"};
         option = JOptionPane.showInputDialog(null, "Escolha uma opção", "Menu", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -50,11 +50,11 @@ public class PanelView implements IView{
             }
         }
 
-        return null;
+        throw new IllegalArgumentException("Invalid value: " + option);
     }
 
     @Override
-    public UserDTO readUser() {
+    public UserDTO readUser() throws NullPointerException {
         Panel panel = new Panel();
 
         panel.setLayout(new GridLayout(4,1));
@@ -78,14 +78,18 @@ public class PanelView implements IView{
         int option = JOptionPane.showConfirmDialog(null, panel, "Cadastrar Usuário", JOptionPane.OK_CANCEL_OPTION);
 
         if(option == JOptionPane.OK_OPTION){
-            return new UserDTO(name.getText(), email.getText(), phone.getText(), userType.getSelectedValue());
+            try {
+                return new UserDTO(name.getText(), email.getText(), phone.getText(), userType.getSelectedValue());
+            }catch (NullPointerException e){
+                throw new NullPointerException("Você precisa selecionar o tipo do usuário");
+            }
         }
 
-        return null;
+        throw new NullPointerException("Você precisa selecionar o tipo do usuário");
     }
 
     @Override
-    public BookDTO readBook() {
+    public BookDTO readBook() throws NumberFormatException {
         Panel panel = new Panel();
 
         panel.setLayout(new GridLayout(4,1));
@@ -104,10 +108,14 @@ public class PanelView implements IView{
         int option = JOptionPane.showConfirmDialog(null, panel, "Cadastrar Livro", JOptionPane.OK_CANCEL_OPTION);
 
         if(option == JOptionPane.OK_OPTION){
-            return new BookDTO(title.getText(), Integer.parseInt(edition.getText()), author.getText());
+            try{
+                return new BookDTO(title.getText(), Integer.parseInt(edition.getText()), author.getText());
+            }catch (NumberFormatException e){
+                throw new NumberFormatException("O campo edição não pode estar vazio");
+            }
         }
 
-        return null;
+        throw new NumberFormatException("O campo edição não pode estar vazio");
     }
 
     @Override
