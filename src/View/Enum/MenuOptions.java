@@ -2,15 +2,21 @@ package View.Enum;
 
 public enum MenuOptions {
 
-    INSERT_BOOK(0),
-    INSERT_USER(1),
-    RESERVE_BOOK(2),
-    LOGS(3),
-    QUIT(4);
+    INSERT_BOOK("Adicionar livro"),
+    INSERT_USER("Adicionar usuário"),
+    RESERVE_BOOK("Reservar livro"),
+    RETURN_BOOK("Devolver livro"),
+    LOGS("Relatórios"),
+    QUIT("Sair");
 
-    private final int value;
+    private final String value;
 
-    MenuOptions(int value) {
+    MenuOptions(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
+
 }
