@@ -4,6 +4,7 @@ import Model.Dao.UserDao;
 import Model.Dao.UserDaoImpl;
 import Model.Entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -25,4 +26,14 @@ public class UserService {
     public User getById(String id){
         return dao.getById(id);
     }
+    public List<User> getPenalizedUsers(){
+        List<User> l = new ArrayList<>();
+        for (User u: getAll()){
+            if (u.getPenalty() > 0){
+                l.add(u);
+            }
+        }
+        return l;
+    }
+
 }

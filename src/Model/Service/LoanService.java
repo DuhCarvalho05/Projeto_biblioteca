@@ -75,7 +75,7 @@ public class LoanService {
         return loans;
     }
 
-    private List<Loan> getLateLoans() {
+    public List<Loan> getLateLoans() {
         ArrayList <Loan> loans = new ArrayList<>();
         for (Loan l : loanDao.getAll()){
             if (l.isDelayed()){

@@ -4,6 +4,7 @@ import Model.Dao.BookDao;
 import Model.Dao.BookDaoImpl;
 import Model.Entity.Book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookService {
@@ -25,6 +26,15 @@ public class BookService {
     }
     public Book getById(String title, int edition){
         return dao.getById(title,edition);
+    }
+    public List<Book> getBorrowedBooks(){
+        List<Book> l = new ArrayList<>();
+        for (Book b: getAll()){
+            if (!b.isAvailable()){
+                l.add(b);
+            }
+        }
+        return l;
     }
 
 }
