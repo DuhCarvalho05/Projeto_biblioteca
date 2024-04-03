@@ -1,5 +1,6 @@
 package Model.Service;
 
+import Exceptions.FailedReturnExecption;
 import Model.Dao.BookDaoImpl;
 import Model.Dao.LoanDao;
 import Model.Dao.LoanDaoImpl;
@@ -24,10 +25,10 @@ public class LoanService {
         this.userDao = UserDaoImpl.getInstance();
     }
 
-    public Boolean insert(Loan loan){;
+    public Boolean insert(Loan loan) throws FailedReturnExecption {;
         return loanDao.insert(loan) && bookDao.update(loan.getBook());
     }
-    public Boolean delete(Loan loan){
+    public Boolean delete(Loan loan) throws FailedReturnExecption {
         return loanDao.delete(loan);
     }
     public List<Loan> getAll(){
