@@ -13,21 +13,33 @@ import javax.swing.*;
 public class PanelView implements IView{
     @Override
     public MenuOptions showMenu() {
-        Object option;
-        String[] options = {"Cadastrar livro", "Cadastrar usuário", "Empréstimo de livros", "Relatórios", "Sair"};
-        option = JOptionPane.showInputDialog(null, "Escolha uma opção", "Menu", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        String option;
+        Panel panel = new Panel();
 
-        for (int i = 0; i < options.length; i++) {
-            if (options[i].equals(option)){
-                return MenuOptions.values()[i];
+        panel.setLayout(new GridLayout(1,1));
+
+        JComboBox<String> comboBox = new JComboBox<>();
+        for (MenuOptions menuOption : MenuOptions.values())
+            comboBox.addItem(menuOption.getValue());
+
+        comboBox.addItem("AAAA");
+
+        panel.add(comboBox);
+
+        JOptionPane.showMessageDialog(null, panel, "Menu", JOptionPane.QUESTION_MESSAGE);
+        option = (String) comboBox.getSelectedItem();
+
+        for (MenuOptions menuOption : MenuOptions.values()) {
+            if (menuOption.getValue().equals(option)){
+                return menuOption;
             }
         }
 
-        return null;
+        throw new IllegalArgumentException("Invalid value: " + option);
     }
 
     @Override
-    public MenuLogs showMenuLogs() {
+    public MenuLogs showMenuLogs() throws IllegalArgumentException {
         Object option;
         String[] options = {"Todos os livros", "Livros emprestados", "Usuários com livros", "Usuários penalizados", "Usuários atrasados", "Voltar"};
         option = JOptionPane.showInputDialog(null, "Escolha uma opção", "Menu", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -38,11 +50,11 @@ public class PanelView implements IView{
             }
         }
 
-        return null;
+        throw new IllegalArgumentException("Invalid value: " + option);
     }
 
     @Override
-    public UserDTO readUser() {
+    public UserDTO readUser() throws NullPointerException {
         Panel panel = new Panel();
 
         panel.setLayout(new GridLayout(4,1));
@@ -66,14 +78,18 @@ public class PanelView implements IView{
         int option = JOptionPane.showConfirmDialog(null, panel, "Cadastrar Usuário", JOptionPane.OK_CANCEL_OPTION);
 
         if(option == JOptionPane.OK_OPTION){
-            return new UserDTO(name.getText(), email.getText(), phone.getText(), userType.getSelectedValue());
+            try {
+                return new UserDTO(name.getText(), email.getText(), phone.getText(), userType.getSelectedValue());
+            }catch (NullPointerException e){
+                throw new NullPointerException("Você precisa selecionar o tipo do usuário");
+            }
         }
 
-        return null;
+        throw new NullPointerException("Você precisa selecionar o tipo do usuário");
     }
 
     @Override
-    public BookDTO readBook() {
+    public BookDTO readBook() throws NumberFormatException {
         Panel panel = new Panel();
 
         panel.setLayout(new GridLayout(4,1));
@@ -92,10 +108,14 @@ public class PanelView implements IView{
         int option = JOptionPane.showConfirmDialog(null, panel, "Cadastrar Livro", JOptionPane.OK_CANCEL_OPTION);
 
         if(option == JOptionPane.OK_OPTION){
-            return new BookDTO(title.getText(), Integer.parseInt(edition.getText()), author.getText());
+            try{
+                return new BookDTO(title.getText(), Integer.parseInt(edition.getText()), author.getText());
+            }catch (NumberFormatException e){
+                throw new NumberFormatException("O campo edição não pode estar vazio");
+            }
         }
 
-        return null;
+        throw new NumberFormatException("O campo edição não pode estar vazio");
     }
 
     @Override
@@ -115,14 +135,59 @@ public class PanelView implements IView{
         JList<String> userJList = new JList<>(userNames.toArray(new String[0]));
         JList<String> bookJList = new JList<>(bookTitles.toArray(new String[0]));
 
-        JOptionPane.showMessageDialog(null, userJList, "Lista de usuários", JOptionPane.PLAIN_MESSAGE);
-        JOptionPane.showMessageDialog(null, bookJList, "Lista de livros", JOptionPane.PLAIN_MESSAGE);
+        userJList.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        bookJList.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        //Make user list more pretty
+        userJList.setLayoutOrientation(JList.VERTICAL);
+        userJList.setVisibleRowCount(-1);
+
+        //Make book list more pretty
+        bookJList.setLayoutOrientation(JList.VERTICAL);
+        bookJList.setVisibleRowCount(-1);
+
+        Panel panel = new Panel();
+
+        panel.setLayout(new GridLayout(3,1));
+        panel.add(new Label("Selecione o usuário:"));
+        panel.add(userJList);
+        panel.add(new Label(""));
+        panel.add(new Label(""));
+        panel.add(new Label("Selecione o livro:"));
+        panel.add(bookJList);
+
+        JOptionPane.showConfirmDialog(null, panel, "Emprestimo de livro", JOptionPane.OK_CANCEL_OPTION);
 
         UserDTO user = users.get(userJList.getSelectedIndex());
         BookDTO book = books.get(bookJList.getSelectedIndex());
 
         return new LoanDTO(user, book);
     }
+
+    public LoanDTO returnBook(List<LoanDTO> loanBooks){
+        List<String> loandedBooks = new ArrayList<>();
+
+        for (LoanDTO loan : loanBooks) {
+            loandedBooks.add(loan.getUser().getName() + "\n" + loan.getBook().getTitle() + " | Edição: " + loan.getBook().getEdition());
+        }
+
+        JList<String> loandedList = new JList<>(loandedBooks.toArray(new String[0]));
+
+        loandedList.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        loandedList.setLayoutOrientation(JList.VERTICAL);
+        loandedList.setVisibleRowCount(-1);
+
+        Panel panel = new Panel();
+
+        panel.setLayout(new GridLayout(3,1));
+        panel.add(new Label("Selecione o usuário que está devolvendo o livro:"));
+        panel.add(loandedList);
+
+        JOptionPane.showConfirmDialog(null, panel, "Devolução de livro", JOptionPane.OK_CANCEL_OPTION);
+
+        return loanBooks.get(loandedList.getSelectedIndex());
+    }
+
 
     @Override
     public void showAllBooks(List<BookDTO> books) {

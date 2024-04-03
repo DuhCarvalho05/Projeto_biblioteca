@@ -1,5 +1,8 @@
 package Model.Service;
 
+import Exceptions.DeleteFailedException;
+import Exceptions.FailedReturnException;
+import Exceptions.InsertFailedException;
 import Model.Dao.BookDaoImpl;
 import Model.Dao.LoanDao;
 import Model.Dao.LoanDaoImpl;
@@ -8,6 +11,7 @@ import Model.Entity.Book;
 import Model.Entity.Loan;
 import Model.Entity.User;
 
+import javax.crypto.DecapsulateException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -24,33 +28,10 @@ public class LoanService {
         this.userDao = UserDaoImpl.getInstance();
     }
 
-    public Boolean insert(Loan loan) throws {
-
-        private Boolean setBook(Book book){
-            if (book.isAvailable()){
-                this.borrowed = book;
-                return true;
-            }
-            return false;
-        }
-        private Boolean setUser(User user){
-            if (user.getPenalty() == 0){
-                this.bailee = user;
-                return true;
-            }
-            return false;
-        }
-        private Boolean setDates(LocalDate acquiredDate, LocalDate returnDate){
-            if (acquiredDate.isBefore(returnDate)){
-                this.acquiredDate = acquiredDate;
-                this.returnDate = returnDate;
-                return true;
-            }
-            return false;
-        }
+    public Boolean insert(Loan loan) throws InsertFailedException, FailedReturnException {;
         return loanDao.insert(loan) && bookDao.update(loan.getBook());
     }
-    public Boolean delete(Loan loan){
+    public Boolean delete(Loan loan) throws DeleteFailedException {
         return loanDao.delete(loan);
     }
     public List<Loan> getAll(){
@@ -98,7 +79,7 @@ public class LoanService {
         return loans;
     }
 
-    private List<Loan> getLateLoans() {
+    public List<Loan> getLateLoans() {
         ArrayList <Loan> loans = new ArrayList<>();
         for (Loan l : loanDao.getAll()){
             if (l.isDelayed()){

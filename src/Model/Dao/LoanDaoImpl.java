@@ -1,5 +1,8 @@
 package Model.Dao;
 
+import Exceptions.DeleteFailedException;
+import Exceptions.FailedReturnException;
+import Exceptions.InsertFailedException;
 import Model.Entity.Loan;
 
 import java.util.ArrayList;
@@ -22,19 +25,19 @@ public class LoanDaoImpl implements LoanDao{
         return instance;
     }
 
-    public boolean insert(Loan loan) {
+    public boolean insert(Loan loan) throws InsertFailedException {
         if (loan != null) {
             return dataset.add(loan);
         }
-        return false;
+        throw new InsertFailedException("Não foi possível inserir empréstimo");
     }
 
     @Override
-    public boolean delete(Loan loan) {
+    public boolean delete(Loan loan) throws DeleteFailedException {
         if (loan != null){
             return dataset.remove(loan);
         }
-       return false;
+       throw new DeleteFailedException("Não foi possível detelar empréstimo");
     }
 
     @Override
