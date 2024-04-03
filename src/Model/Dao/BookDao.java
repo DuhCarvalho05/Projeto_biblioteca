@@ -1,14 +1,16 @@
 package Model.Dao;
 
-import Exceptions.FailedReturnExecption;
+import Exceptions.DeleteFailedException;
+import Exceptions.FailedReturnException;
+import Exceptions.InsertFailedException;
 import Model.Entity.Book;
 
 import java.util.List;
 
 public interface BookDao {
-    boolean insert(Book book) throws FailedReturnExecption;
-    boolean update(Book book) throws FailedReturnExecption;;
-    boolean delete(Book book) throws FailedReturnExecption;
+    boolean insert(Book book) throws InsertFailedException;
+    boolean update(Book book) throws FailedReturnException;;
+    boolean delete(Book book) throws DeleteFailedException;
     List<Book> getAll();
-    Book getById(String title, int edition) throws FailedReturnExecption;
+    Book getById(String title, int edition) throws FailedReturnException;
 }

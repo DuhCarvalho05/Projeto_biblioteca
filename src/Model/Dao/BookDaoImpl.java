@@ -1,6 +1,8 @@
 package Model.Dao;
 
-import Exceptions.FailedReturnExecption;
+import Exceptions.DeleteFailedException;
+import Exceptions.FailedReturnException;
+import Exceptions.InsertFailedException;
 import Model.Entity.Book;
 
 import java.util.*;
@@ -21,29 +23,29 @@ public class BookDaoImpl implements BookDao{
     }
 
     @Override
-    public boolean insert(Book book) throws FailedReturnExecption {
+    public boolean insert(Book book) throws InsertFailedException {
         if (book != null){
             return dataset.add(book);
         }
-        throw new FailedReturnExecption("Não foi possível inserir o livro.");
+        throw new InsertFailedException("Não foi possível inserir o livro.");
     }
 
     @Override
-    public boolean update(Book book) throws FailedReturnExecption {
+    public boolean update(Book book) throws FailedReturnException {
         if (book != null){
             if (dataset.remove(book))
                 book.setBorrow();
             return dataset.add(book);
         }
-        throw new FailedReturnExecption("Não foi possível atualizar o livro.");
+        throw new FailedReturnException("Não foi possível atualizar o livro.");
     }
 
     @Override
-    public boolean delete(Book book) throws FailedReturnExecption {
+    public boolean delete(Book book) throws DeleteFailedException {
         if (book != null){
             return dataset.remove(book);
         }
-        throw new FailedReturnExecption("Não foi possível deletar esse livro.");
+        throw new DeleteFailedException("Não foi possível deletar esse livro.");
     }
 
     @Override
@@ -52,12 +54,12 @@ public class BookDaoImpl implements BookDao{
     }
 
     @Override
-    public Book getById(String title, int edition) throws FailedReturnExecption {
+    public Book getById(String title, int edition) throws FailedReturnException {
          for (Book b : dataset){
              if ((b.getEdition() == edition) && b.getTitle().equals(title)){
                  return b;
              }
          }
-        throw new FailedReturnExecption("Livro não encontrado.");
+        throw new FailedReturnException("Livro não encontrado.");
     }
 }

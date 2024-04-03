@@ -1,6 +1,8 @@
 package Model.Service;
 
-import Exceptions.FailedReturnExecption;
+import Exceptions.DeleteFailedException;
+import Exceptions.FailedReturnException;
+import Exceptions.InsertFailedException;
 import Model.Dao.BookDaoImpl;
 import Model.Dao.LoanDao;
 import Model.Dao.LoanDaoImpl;
@@ -9,6 +11,7 @@ import Model.Entity.Book;
 import Model.Entity.Loan;
 import Model.Entity.User;
 
+import javax.crypto.DecapsulateException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -25,10 +28,10 @@ public class LoanService {
         this.userDao = UserDaoImpl.getInstance();
     }
 
-    public Boolean insert(Loan loan) throws FailedReturnExecption {;
+    public Boolean insert(Loan loan) throws InsertFailedException, FailedReturnException {;
         return loanDao.insert(loan) && bookDao.update(loan.getBook());
     }
-    public Boolean delete(Loan loan) throws FailedReturnExecption {
+    public Boolean delete(Loan loan) throws DeleteFailedException {
         return loanDao.delete(loan);
     }
     public List<Loan> getAll(){

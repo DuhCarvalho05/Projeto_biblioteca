@@ -1,6 +1,8 @@
 package Model.Dao;
 
-import Exceptions.FailedReturnExecption;
+import Exceptions.DeleteFailedException;
+import Exceptions.FailedReturnException;
+import Exceptions.InsertFailedException;
 import Model.Entity.User;
 
 import java.util.ArrayList;
@@ -24,20 +26,20 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public boolean insert(User user) throws FailedReturnExecption {
+    public boolean insert(User user) throws InsertFailedException {
         if (user != null){
             return dataset.add(user);
         }
 
-        throw new FailedReturnExecption("Não foi possível inserir usuário.");
+        throw new InsertFailedException("Não foi possível inserir usuário.");
     }
 
     @Override
-    public boolean delete(User user) throws FailedReturnExecption {
+    public boolean delete(User user) throws DeleteFailedException {
         if (user != null){
             return dataset.remove(user);
         }
-        throw new FailedReturnExecption("Não foi possível deletar usuário.");
+        throw new DeleteFailedException("Não foi possível deletar usuário.");
     }
 
     @Override
@@ -46,12 +48,12 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public User getById(String email) throws FailedReturnExecption {
+    public User getById(String email) throws FailedReturnException {
         for (User u : dataset){
             if (u.getEmail().equals(email)){
                 return u;
             }
         }
-        throw new FailedReturnExecption("Usuário não encontrado.");
+        throw new FailedReturnException("Usuário não encontrado.");
     }
 }
