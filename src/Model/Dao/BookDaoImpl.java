@@ -22,7 +22,8 @@ public class BookDaoImpl implements BookDao{
     @Override
     public boolean insert(Book book) {
         if (book != null){
-            return dataset.add(book);
+            return dataset.add(new Book(book.getTitle(), book.getEdition(),
+                    book.getAuthor(), book.isAvailable(), book.getTimesBorrowed()));
         }
         return false;
     }
@@ -32,7 +33,8 @@ public class BookDaoImpl implements BookDao{
         if (book != null){
             if (dataset.remove(book))
                 book.setBorrow();
-            return dataset.add(book);
+            return dataset.add(new Book(book.getTitle(), book.getEdition(),
+                    book.getAuthor(), book.isAvailable(), book.getTimesBorrowed()));
         }
         return false;
     }
@@ -54,7 +56,7 @@ public class BookDaoImpl implements BookDao{
     public Book getById(String title, int edition) {
          for (Book b : dataset){
              if ((b.getEdition() == edition) && b.getTitle().equals(title)){
-                 return b;
+                 return new Book(b.getTitle(), b.getEdition(), b.getAuthor(), b.isAvailable(), b.getTimesBorrowed());
              }
          }
         return null;

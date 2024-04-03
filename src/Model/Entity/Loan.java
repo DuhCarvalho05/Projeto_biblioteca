@@ -8,13 +8,15 @@ public class Loan implements Comparable<Loan>{
     private LocalDate acquiredDate;
     private LocalDate returnDate;
 
-    public Loan(User bailee, Book book, LocalDate acquiredDate,
+    public Loan(User user, Book book, LocalDate acquiredDate,
                 LocalDate returnDate) {
-        if (setBook(book) && setUser(bailee) && setDates(acquiredDate,
-                returnDate)) {
-            borrowed.setBorrow();
-        }
+        borrowed = book;
+        bailee = user;
+        this.acquiredDate = acquiredDate;
+        this.returnDate = returnDate;
+        borrowed.setBorrow();
     }
+
     public Boolean isDelayed(){
         return getReturnDate().isBefore(LocalDate.now());
     }
@@ -33,28 +35,6 @@ public class Loan implements Comparable<Loan>{
 
     public LocalDate getReturnDate() {
         return returnDate;
-    }
-    private Boolean setBook(Book book){
-        if (book.isAvailable()){
-            this.borrowed = book;
-            return true;
-        }
-        return false;
-    }
-    private Boolean setUser(User user){
-        if (user.getPenalty() == 0){
-            this.bailee = user;
-            return true;
-        }
-        return false;
-    }
-    private Boolean setDates(LocalDate acquiredDate, LocalDate returnDate){
-        if (acquiredDate.isBefore(returnDate)){
-            this.acquiredDate = acquiredDate;
-            this.returnDate = returnDate;
-            return true;
-        }
-        return false;
     }
 
     @Override

@@ -24,7 +24,30 @@ public class LoanService {
         this.userDao = UserDaoImpl.getInstance();
     }
 
-    public Boolean insert(Loan loan){;
+    public Boolean insert(Loan loan) throws {
+
+        private Boolean setBook(Book book){
+            if (book.isAvailable()){
+                this.borrowed = book;
+                return true;
+            }
+            return false;
+        }
+        private Boolean setUser(User user){
+            if (user.getPenalty() == 0){
+                this.bailee = user;
+                return true;
+            }
+            return false;
+        }
+        private Boolean setDates(LocalDate acquiredDate, LocalDate returnDate){
+            if (acquiredDate.isBefore(returnDate)){
+                this.acquiredDate = acquiredDate;
+                this.returnDate = returnDate;
+                return true;
+            }
+            return false;
+        }
         return loanDao.insert(loan) && bookDao.update(loan.getBook());
     }
     public Boolean delete(Loan loan){
