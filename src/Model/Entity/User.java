@@ -49,6 +49,7 @@ public abstract class User implements Comparable<User> {
 
     @Override
     public int compareTo(User user){
-        return user == null ? 0 : this.getEmail().compareTo(user.getEmail());
+        return user == null ? 0 :
+                this.getEmail().replace(" ", "").toUpperCase().compareTo(user.getEmail().replace(" ", "").toUpperCase());
     }
 }

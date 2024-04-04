@@ -29,6 +29,7 @@ public class LoanService {
         if (loan.getBook().isAvailable() || loan.getBailee().getPenalty() > 0 || loan.getReturnDate().isBefore(LocalDate.now()))
             throw new InvalidValuesException("Dados do emprestimo inválidos.");
 
+        bookDao.update(loan.getBook());
         return loanDao.insert(loan);
     }
 
@@ -36,6 +37,8 @@ public class LoanService {
         if (loan == null)
             throw new InvalidValuesException("Emprestimo inválido.");
 
+        bookDao.update(new Book(loan.getBook().getTitle(),
+                loan.getBook().getEdition(), loan.getBook().getAuthor(), true, loan.getBook().getTimesBorrowed()));
         return loanDao.delete(loan);
     }
 

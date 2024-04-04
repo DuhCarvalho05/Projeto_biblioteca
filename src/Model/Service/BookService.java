@@ -34,6 +34,7 @@ public class BookService {
     public List<Book> getAll() {
         return dao.getAll();
     }
+
     public Book getById(String title, int edition) throws InvalidValuesException, ReturnFailedException {
         if (title == null || edition == 0)
             throw new InvalidValuesException("Livro inexistente.");

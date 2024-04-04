@@ -46,17 +46,22 @@ public class Book implements Comparable<Book> {
         return isAvailable;
     }
 
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
     @Override
     public boolean equals(Object o){
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return (edition == book.edition) && title.equals(book.title);
+        return (edition == book.edition) && title.trim().equalsIgnoreCase(book.title.trim());
     }
 
     @Override
     public int compareTo(Book book){
-        int result = this.getTitle().compareTo(book.getTitle());
+        int result =
+                this.getTitle().replace(" ", "").toUpperCase().compareTo(book.getTitle().replace(" ", "").toUpperCase());
         return result == 0 ? this.getEdition() - (book.getEdition()) : result;
     }
 }
