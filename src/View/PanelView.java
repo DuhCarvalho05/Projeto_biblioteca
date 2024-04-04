@@ -22,8 +22,6 @@ public class PanelView implements IView{
         for (MenuOptions menuOption : MenuOptions.values())
             comboBox.addItem(menuOption.getValue());
 
-        comboBox.addItem("AAAA");
-
         panel.add(comboBox);
 
         JOptionPane.showMessageDialog(null, panel, "Menu", JOptionPane.QUESTION_MESSAGE);

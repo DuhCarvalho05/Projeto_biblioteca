@@ -24,7 +24,11 @@ public class BookController {
         if(book == null) {
             view.showMessage("Operação cancelada", "Operação cancelada");
         } else {
-            view.alertScreen(service.insert(book.toDomain()));
+            try {
+                view.alertScreen(service.insert(book.toDomain()));
+            } catch (Exception e) {
+                view.showMessage(e.getMessage(), "Erro ao inserir livro!");
+            }
         }
     }
 
@@ -35,5 +39,10 @@ public class BookController {
             booksDTO.add(new BookDTO(book));
         }
         view.showAllBooks(booksDTO);
+    }
+
+    public void getAllBorrowedBooks(){
+        var books = BookDTO.toDomain(service.getBorrowedBooks());
+        view.showLoanBooks(books);
     }
 }

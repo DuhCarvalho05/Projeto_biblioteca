@@ -26,7 +26,7 @@ public class LoanService {
     }
 
     public Boolean insert(Loan loan) throws InsertFailedException, InvalidValuesException {
-        if (!loan.getBook().isAvailable() || loan.getBailee().getPenalty() > 0 || loan.getReturnDate().isBefore(LocalDate.now()))
+        if (loan.getBook().isAvailable() || loan.getBailee().getPenalty() > 0 || loan.getReturnDate().isBefore(LocalDate.now()))
             throw new InvalidValuesException("Dados do emprestimo inválidos.");
 
         return loanDao.insert(loan);
