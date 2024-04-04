@@ -34,8 +34,28 @@ public class LoanController {
         if(loan == null) {
             view.showMessage("Operação cancelada", "Operação cancelada");
         } else {
-            view.alertScreen(loanService.insert(loan.toDomain()));
+            try {
+                view.alertScreen(loanService.insert(loan.toDomain()));
+            } catch (Exception e) {
+                view.showMessage(e.getMessage(), "Erro ao fazer empréstimo!");
+            }
         }
+    }
+
+    public void returnBooks() {
+        var loanDTO = LoanDTO.toDomain(loanService.getAll());
+        var loanReturn = view.returnBook(loanDTO);
+
+        try {
+            view.alertScreen(loanService.delete(loanReturn.toDomain()));
+        } catch (Exception e) {
+            view.showMessage(e.getMessage(), "Erro ao devolver livro!");
+        }
+    }
+
+    public void getLateBooks() {
+        var books = LoanDTO.toDomain(loanService.getLateLoans());
+        view.showLateBooking(books);
     }
 
     public void getAll() {
