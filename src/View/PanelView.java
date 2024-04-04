@@ -1,35 +1,51 @@
 package View;
 
+import DTO.BookDTO;
+import DTO.LoanDTO;
+import DTO.UserDTO;
+import View.Enum.MenuLogs;
+import View.Enum.MenuOptions;
+
+import javax.swing.*;
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import DTO.*;
-import View.Enum.*;
-
-import javax.swing.*;
-
 public class PanelView implements IView{
+
     @Override
-    public MenuOptions showMenu() {
-        String option;
+    public MenuOptions showMenu() throws IllegalArgumentException{
+        StringBuilder option = new StringBuilder();
+        String[] options = new String[MenuOptions.values().length];
+
+        for (int i = 0; i < MenuOptions.values().length; i++) {
+            options[i] = MenuOptions.values()[i].getValue();
+        }
+
+        JComboBox<String> comboBox = new JComboBox<>(options);
+        comboBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         Panel panel = new Panel();
-
-        panel.setLayout(new GridLayout(1,1));
-
-        JComboBox<String> comboBox = new JComboBox<>();
-        for (MenuOptions menuOption : MenuOptions.values())
-            comboBox.addItem(menuOption.getValue());
-
+        panel.setLayout(new GridLayout(2,1));
+        panel.setPreferredSize(new Dimension(200, 100));
+        panel.add(new Label("Escolha uma opção:"));
         panel.add(comboBox);
 
-        JOptionPane.showMessageDialog(null, panel, "Menu", JOptionPane.QUESTION_MESSAGE);
-        option = (String) comboBox.getSelectedItem();
+        JOptionPane pane = new JOptionPane(panel, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, new Object[]{}, null);
+        JDialog dialog = pane.createDialog("Menu");
+        JButton okButton = new JButton("OK");
+        okButton.addActionListener(e -> {
+            dialog.dispose();
+            option.append(comboBox.getSelectedItem());
+        });
 
-        for (MenuOptions menuOption : MenuOptions.values()) {
-            if (menuOption.getValue().equals(option)){
-                return menuOption;
+        pane.setOptions(new Object[]{okButton});
+        dialog.setVisible(true);
+
+        for (int i = 0; i < options.length; i++) {
+            if (options[i].contentEquals(option)){
+                return MenuOptions.values()[i];
             }
         }
 
