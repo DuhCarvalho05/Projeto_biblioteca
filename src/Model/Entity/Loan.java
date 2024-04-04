@@ -24,6 +24,7 @@ public class Loan implements Comparable<Loan>{
         this.acquiredDate = acquiredDate;
         this.returnDate = returnDate;
         borrowed.setBorrow();
+        book.setBorrow();
     }
 
     public Boolean isDelayed(){

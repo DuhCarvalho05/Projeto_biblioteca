@@ -24,8 +24,17 @@ public class UserController {
         if(user == null) {
             view.showMessage("Operação cancelada", "Operação cancelada");
         } else {
-            view.alertScreen(service.insert(user.toDomain()));
+            try{
+                view.alertScreen(service.insert(user.toDomain()));
+            } catch (Exception e) {
+                view.showMessage(e.getMessage(), "Erro ao criar usuário!");
+            }
         }
+    }
+
+    public void userWithPenaltyes() {
+        var user = UserDTO.toDomain(service.getPenalizedUsers());
+        view.showUserWithPenality(user);
     }
 
 }

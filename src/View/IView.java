@@ -16,6 +16,8 @@ public interface IView {
 
     LoanDTO readLoan(List<BookDTO> books, List<UserDTO> users);
 
+    LoanDTO returnBook(List<LoanDTO> loanBooks);
+
     void showAllBooks(List<BookDTO> books);
 
     void showLoanBooks(List<BookDTO> books);

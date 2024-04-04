@@ -49,6 +49,9 @@ public class MainController {
                 case RESERVE_BOOK:
                     loanController.createLoan();
                     break;
+                case RETURN_BOOK:
+                    loanController.returnBooks();
+                    break;
                 case LOGS:
                     showLogs();
                     break;
@@ -68,16 +71,16 @@ public class MainController {
                 bookController.getAll();
                 break;
             case RESERVED_BOOKS:
-
+                bookController.getAllBorrowedBooks();
                 break;
             case USER_WITH_BOOK:
                 loanController.getAllUsers();
                 break;
             case USER_WITH_PENALITY:
-
+                userController.userWithPenaltyes();
                 break;
             case LATE_BOOKING:
-
+                loanController.getLateBooks();
                 break;
             default:
                 break;
@@ -85,16 +88,20 @@ public class MainController {
     }
 
     private void load(){
-        bookDao.insert(new Book("Harry Potter", 3, "J.K Rowling", true, 0));
-        bookDao.insert(new Book("Senhor dos aneis", 1, "sei la", true, 0));
-        bookDao.insert(new Book("Dracula", 10, "Um véio", true, 0));
-        bookDao.insert(new Book("A turma da Mônica", 26, "Mauricio de Souza", true, 0));
+        try {
+            bookDao.insert(new Book("Harry Potter", 3, "J.K Rowling", true, 0));
+            bookDao.insert(new Book("Senhor dos aneis", 1, "sei la", true, 0));
+            bookDao.insert(new Book("Dracula", 10, "Um véio", true, 0));
+            bookDao.insert(new Book("A turma da Mônica", 26, "Mauricio de Souza", true, 0));
 
-        userDao.insert(new Employee("Ednilson", "ednilsonrossi@gmail.com", "123456789"));
-        userDao.insert(new Employee("Furquim", "furquim@gmail.com", "987654321"));
+            userDao.insert(new Employee("Ednilson", "ednilsonrossi@gmail.com", "123456789"));
+            userDao.insert(new Employee("Furquim", "furquim@gmail.com", "987654321"));
 
-        userDao.insert(new Student("Augusto", "guto@gmail.com", "1111111111"));
-        userDao.insert(new Student("Caio", "caio@gmail.com", "222222222"));
+            userDao.insert(new Student("Augusto", "guto@gmail.com", "1111111111"));
+            userDao.insert(new Student("Caio", "caio@gmail.com", "222222222"));
+        } catch (Exception e) {
+            view.alertScreen(false);
+        }
 
     }
 
