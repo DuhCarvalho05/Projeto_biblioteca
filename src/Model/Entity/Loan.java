@@ -1,17 +1,26 @@
 package Model.Entity;
 
+import Model.Enum.UserType;
+
 import java.time.LocalDate;
 
 public class Loan implements Comparable<Loan>{
-    private User bailee;
-    private Book borrowed;
-    private LocalDate acquiredDate;
-    private LocalDate returnDate;
+    private final User bailee;
+    private final Book borrowed;
+    private final LocalDate acquiredDate;
+    private final LocalDate returnDate;
 
     public Loan(User user, Book book, LocalDate acquiredDate,
                 LocalDate returnDate) {
-        borrowed = book;
-        bailee = user;
+
+        borrowed = new Book(book.getTitle(), book.getEdition(), book.getAuthor(), book.isAvailable(), book.getTimesBorrowed());
+
+        if (user.getUserType().equals(UserType.EMPLOYEE)) {
+            bailee = new Employee(user.getName(), user.getEmail(), user.getPhone());
+        } else {
+            bailee = new Student(user.getName(), user.getEmail(), user.getPhone());
+        }
+
         this.acquiredDate = acquiredDate;
         this.returnDate = returnDate;
         borrowed.setBorrow();

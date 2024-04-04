@@ -1,7 +1,8 @@
 package Model.Service;
 
 import Exceptions.DeleteFailedException;
-import Exceptions.FailedReturnException;
+import Exceptions.InvalidValuesException;
+import Exceptions.ReturnFailedException;
 import Exceptions.InsertFailedException;
 import Model.Dao.BookDao;
 import Model.Dao.BookDaoImpl;
@@ -17,20 +18,30 @@ public class BookService {
         this.dao = BookDaoImpl.getInstance();
     }
 
-    public Boolean insert(Book book) throws InsertFailedException {
+    public boolean insert(Book book) throws InsertFailedException {
+        if (book == null)
+            throw new InsertFailedException("Livro inválido.");
+
         return dao.insert(book);
     }
-    public Boolean delete(Book book) throws DeleteFailedException {
+    public boolean delete(Book book) throws DeleteFailedException {
+        if (book == null)
+            throw new DeleteFailedException("Livro inválido.");
+
         return dao.delete(book);
     }
 
     public List<Book> getAll() {
         return dao.getAll();
     }
-    public Book getById(String title, int edition) throws FailedReturnException {
+    public Book getById(String title, int edition) throws InvalidValuesException, ReturnFailedException {
+        if (title == null || edition == 0)
+            throw new InvalidValuesException("Livro inexistente.");
+
         return dao.getById(title,edition);
     }
-    public List<Book> getBorrowedBooks() throws FailedReturnException {
+
+    public List<Book> getBorrowedBooks() {
         List<Book> l = new ArrayList<>();
         for (Book b: getAll()){
             if (!b.isAvailable()){
@@ -40,4 +51,13 @@ public class BookService {
         return l;
     }
 
+    public List<Book> getAvailableBooks() {
+        List<Book> l = new ArrayList<>();
+        for (Book b: getAll()){
+            if (b.isAvailable()){
+                l.add(b);
+            }
+        }
+        return l;
+    }
 }

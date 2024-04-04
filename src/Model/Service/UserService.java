@@ -1,8 +1,6 @@
 package Model.Service;
 
-import Exceptions.DeleteFailedException;
-import Exceptions.FailedReturnException;
-import Exceptions.InsertFailedException;
+import Exceptions.*;
 import Model.Dao.UserDao;
 import Model.Dao.UserDaoImpl;
 import Model.Entity.User;
@@ -18,15 +16,25 @@ public class UserService {
     }
 
     public Boolean insert(User user) throws InsertFailedException {
+        if (user == null)
+            throw new InsertFailedException("Usuário inválido.");
+
         return dao.insert(user);
     }
     public Boolean delete(User user) throws DeleteFailedException {
+        if (user == null)
+            throw new DeleteFailedException("Usuário inválido.");
+
         return dao.delete(user);
     }
     public List<User> getAll(){
         return dao.getAll();
     }
-    public User getById(String id) throws FailedReturnException {
+
+    public User getById(String id) throws InvalidValuesException, ReturnFailedException {
+        if (id == null)
+            throw new InvalidValuesException("Usuário inexistente.");
+
         return dao.getById(id);
     }
     public List<User> getPenalizedUsers(){
@@ -38,5 +46,4 @@ public class UserService {
         }
         return l;
     }
-
 }

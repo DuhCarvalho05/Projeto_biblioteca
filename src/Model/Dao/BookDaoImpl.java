@@ -1,8 +1,6 @@
 package Model.Dao;
 
-import Exceptions.DeleteFailedException;
-import Exceptions.FailedReturnException;
-import Exceptions.InsertFailedException;
+import Exceptions.ReturnFailedException;
 import Model.Entity.Book;
 
 import java.util.*;
@@ -16,38 +14,39 @@ public class BookDaoImpl implements BookDao{
     }
 
     public static BookDaoImpl getInstance(){
-        if(instance == null){
+        if(instance == null)
             instance = new BookDaoImpl();
-        }
+
         return instance;
     }
 
     @Override
-    public boolean insert(Book book) throws InsertFailedException {
-        if (book != null){
+    public Boolean insert(Book book) {
+        if (book != null)
             return dataset.add(new Book(book.getTitle(), book.getEdition(),
                     book.getAuthor(), book.isAvailable(), book.getTimesBorrowed()));
-        }
-        throw new InsertFailedException("Não foi possível inserir o livro.");
+
+        return false;
     }
 
     @Override
-    public boolean update(Book book) throws FailedReturnException {
+    public Boolean update(Book book) {
         if (book != null){
-            if (dataset.remove(book))
-                book.setBorrow();
-            return dataset.add(new Book(book.getTitle(), book.getEdition(),
-                    book.getAuthor(), book.isAvailable(), book.getTimesBorrowed()));
+            if (dataset.remove(book)) {
+                //TO DO - Setar availability ao devolver.
+                return dataset.add(new Book(book.getTitle(), book.getEdition(),
+                        book.getAuthor(), book.isAvailable(), book.getTimesBorrowed()));
+            }
         }
-        throw new FailedReturnException("Não foi possível atualizar o livro.");
+        return false;
     }
 
     @Override
-    public boolean delete(Book book) throws DeleteFailedException {
-        if (book != null){
+    public Boolean delete(Book book) {
+        if (book != null)
             return dataset.remove(book);
-        }
-        throw new DeleteFailedException("Não foi possível deletar esse livro.");
+
+        return false;
     }
 
     @Override
@@ -56,12 +55,12 @@ public class BookDaoImpl implements BookDao{
     }
 
     @Override
-    public Book getById(String title, int edition) throws FailedReturnException {
+    public Book getById(String title, int edition) throws ReturnFailedException {
          for (Book b : dataset){
-             if ((b.getEdition() == edition) && b.getTitle().equals(title)){
+             if ((b.getEdition() == edition) && b.getTitle().equals(title))
                  return new Book(b.getTitle(), b.getEdition(), b.getAuthor(), b.isAvailable(), b.getTimesBorrowed());
-             }
+
          }
-        throw new FailedReturnException("Livro não encontrado.");
+        throw new ReturnFailedException("Não foi possível encontrar o livro.");
     }
 }

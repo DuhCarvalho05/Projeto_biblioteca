@@ -1,16 +1,18 @@
 package Model.Dao;
 
-import Exceptions.DeleteFailedException;
-import Exceptions.FailedReturnException;
-import Exceptions.InsertFailedException;
+import Exceptions.ReturnFailedException;
+
+import Model.Entity.Employee;
+import Model.Entity.Student;
 import Model.Entity.User;
+import Model.Enum.UserType;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.TreeSet;
 
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
     private static UserDaoImpl instance;
     private final Collection<User> dataset;
 
@@ -18,28 +20,35 @@ public class UserDaoImpl implements UserDao{
         dataset =  new TreeSet<>();
     }
 
-    public static UserDaoImpl getInstance(){
-        if(instance == null){
+    public static UserDaoImpl getInstance() {
+        if(instance == null)
             instance = new UserDaoImpl();
-        }
+
         return instance;
     }
 
     @Override
-    public boolean insert(User user) throws InsertFailedException {
+    public Boolean insert(User user) {
         if (user != null){
-            return dataset.add(user);
+            if (user.getUserType().equals(UserType.EMPLOYEE)) {
+                return dataset.add(new Employee(user.getName(),
+                        user.getEmail(),
+                    user.getPhone()));
+            } else {
+                return dataset.add(new Student(user.getName(), user.getEmail(),
+                    user.getPhone()));
+            }
         }
 
-        throw new InsertFailedException("Não foi possível inserir usuário.");
+        return false;
     }
 
     @Override
-    public boolean delete(User user) throws DeleteFailedException {
-        if (user != null){
+    public Boolean delete(User user) {
+        if (user != null)
             return dataset.remove(user);
-        }
-        throw new DeleteFailedException("Não foi possível deletar usuário.");
+
+        return false;
     }
 
     @Override
@@ -48,12 +57,18 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public User getById(String email) throws FailedReturnException {
+    public User getById(String email) throws ReturnFailedException {
         for (User u : dataset){
             if (u.getEmail().equals(email)){
-                return u;
+                if (u.getUserType().equals(UserType.EMPLOYEE)) {
+                    return new Employee(u.getName(), u.getEmail(),
+                            u.getPhone());
+                } else {
+                    return new Student(u.getName(), u.getEmail(),
+                            u.getPhone());
+                }
             }
         }
-        throw new FailedReturnException("Usuário não encontrado.");
+        throw new ReturnFailedException("Não foi possível encontrar usuário.");
     }
 }
