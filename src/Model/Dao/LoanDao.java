@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface LoanDao {
     Boolean insert(Loan loan) throws InsertFailedException;
-    Boolean delete(Loan loan) throws DeleteFailedException;;
+    Boolean delete(Loan loan) throws DeleteFailedException;
     List<Loan> getAll();
 }
